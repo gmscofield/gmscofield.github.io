@@ -35,7 +35,7 @@
 # github地址, 头部导航右上角的github链接
 Github: 
   on: true
-  url: https://github.com/yuang01/hexo-theme-bamboo
+  url: https://github.com/gmscofield
 
 # 网站logo
 logo: /medias/logo.png # 为空则不显示
@@ -52,21 +52,21 @@ sidebar:
       avatar: https://pic2.zhimg.com/80/v2-42b72d5ebee4b8d8aa70d9687effe87b_1440w.webp
       shape: rectangle # circle, rectangle
       url: /about/
-      title: 青墨书晚风
-      subtitle: 我是副标题
+      title: MScofield
+      subtitle: 青墨书晚风
       jinrishici: true # Poetry Today. You can set a string, and it will be displayed when loading fails.
       fontFammily: Titillium Web,'PingFang SC','Hiragino Sans GB','Microsoft JhengHei','Microsoft YaHei',sans-serif
       background: '#fff'
       order:  # 卡片排序, 数值越小，越在上面
       social:
-        - icon: fas fa-rss
-          url: /atom.xml
+        - icon: fas fa-facebook
+          url: https://facebook.com/mcgscofield
         - icon: fas fa-envelope
-          url: mailto:me@xxx.com
+          url: gmscofield123@gmail.com
         - icon: fab fa-github
-          url: https://github.com/yuang01/hexo-theme-bamboo
+          url: https://github.com/gmscofield
         - icon: fab fa-qq
-          url: tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=你的qq号码
+          url: tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1023975367
     # ---------------------------------------
     side_toc:
       on: true
@@ -199,10 +199,10 @@ swiper:
   defaultVideoLoadingImg: 'https://img14.360buyimg.com/ddimg/jfs/t1/175057/18/19582/882056/60ee7ac8Ef0045710/202d2ad878684a3b.gif' # video loading img -- use .gif img, 视频预加载动画，使用gif图片作为loading，为空则视频没有预加载动画
   defaultTile: '青墨书晚风' # 标题
   defaultDesc: [] #描 述，例如 ['煮酒洗净尘嚣，论知交', '万般付之一笑，共偕老']
-  defaultLeftBtnText: '阅读文档' # 左边按钮文字, 空字符串则不显示
-  defaultLeftBtnLink: 'https://yuang01.gitee.io/2021/02/08/hexo-theme-bamboo-new/' # 左边按钮链接 
-  defaultRightBtnText: '下载主题' # 右边按钮的文字，空字符串则不显示
-  defaultRightBtnLink: 'https://gitee.com/yuang01/hexo-theme-bamboo/repository/archive/dev.zip' # 右边的按钮的链接
+  defaultLeftBtnText: 'Academic Home' # 左边按钮文字, 空字符串则不显示
+  defaultLeftBtnLink: 'https://jiachangguo.github.io' # 左边按钮链接 
+  defaultRightBtnText: '' # 右边按钮的文字，空字符串则不显示
+  defaultRightBtnLink: '' # 右边的按钮的链接
   defaultDescTyped: true # defaultDesc文字是否开启打字特效  is typed
   defaultDescTypedSpeed: 100 # defaultDesc 打字速度, typed typeSpeed
   defaultDescTypedBackSpeed: 50 # defaultDesc 打字返回速度 typed backSpeed
