@@ -199,7 +199,7 @@ swiper:
   defaultVideoLoadingImg: 'https://img14.360buyimg.com/ddimg/jfs/t1/175057/18/19582/882056/60ee7ac8Ef0045710/202d2ad878684a3b.gif' # video loading img -- use .gif img, 视频预加载动画，使用gif图片作为loading，为空则视频没有预加载动画
   defaultTile: '青墨书晚风' # 标题
   defaultDesc: [] #描 述，例如 ['煮酒洗净尘嚣，论知交', '万般付之一笑，共偕老']
-  defaultLeftBtnText: 'Academic Home' # 左边按钮文字, 空字符串则不显示
+  defaultLeftBtnText: '顶峰相见' # 左边按钮文字, 空字符串则不显示
   defaultLeftBtnLink: 'https://jiachangguo.github.io' # 左边按钮链接 
   defaultRightBtnText: '' # 右边按钮的文字，空字符串则不显示
   defaultRightBtnLink: '' # 右边的按钮的链接
