@@ -34,7 +34,7 @@
 
 # github地址, 头部导航右上角的github链接
 Github: 
-  on: true
+  on: false
   url: https://github.com/gmscofield
 
 # 网站logo
@@ -53,7 +53,7 @@ sidebar:
       shape: rectangle # circle, rectangle
       url: /about/
       title: MScofield
-      subtitle: 青墨书晚风
+      subtitle: 竹影疏风
       jinrishici: true # Poetry Today. You can set a string, and it will be displayed when loading fails.
       fontFammily: Titillium Web,'PingFang SC','Hiragino Sans GB','Microsoft JhengHei','Microsoft YaHei',sans-serif
       background: '#fff'
@@ -197,8 +197,8 @@ swiper:
   defaultImg: 'https://pic1.zhimg.com/v2-af3ccef61cf58b1a70765747cc1bbeac_b.jpg' # 图片，没有则随机选取
   defaultVideo: '' # video，min-width:992px show
   defaultVideoLoadingImg: 'https://img14.360buyimg.com/ddimg/jfs/t1/175057/18/19582/882056/60ee7ac8Ef0045710/202d2ad878684a3b.gif' # video loading img -- use .gif img, 视频预加载动画，使用gif图片作为loading，为空则视频没有预加载动画
-  defaultTile: '青墨书晚风' # 标题
-  defaultDesc: [] #描 述，例如 ['煮酒洗净尘嚣，论知交', '万般付之一笑，共偕老']
+  defaultTile: '竹影疏风' # 标题
+  defaultDesc: ['万般付之一笑，共偕老'] #描 述，例如 ['煮酒洗净尘嚣，论知交', '万般付之一笑，共偕老']
   defaultLeftBtnText: '顶峰相见' # 左边按钮文字, 空字符串则不显示
   defaultLeftBtnLink: 'https://jiachangguo.github.io' # 左边按钮链接 
   defaultRightBtnText: '' # 右边按钮的文字，空字符串则不显示
@@ -610,8 +610,8 @@ color_scheme:
 site_footer:
   # 通过layout控制页脚元素的显示和顺序
   # busuanzi是访客数那个,假如说你想在 social和 copyright中间加一个自定义内容, 可以这样写 layout: [social, aaa ,copyright, busuanzi, custom], 然后在下面写上aaa: 'markdown格式', aaa这个名称随便取
-  layout: [social, copyright, busuanzi, custom]
-  social:
+  layout: [copyright, custom]
+  # social:
     # - icon: fas fa-rss
     #   url: /atom.xml
     # - icon: fas fa-envelope
