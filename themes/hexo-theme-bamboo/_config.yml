@@ -58,15 +58,15 @@ sidebar:
       fontFammily: Titillium Web,'PingFang SC','Hiragino Sans GB','Microsoft JhengHei','Microsoft YaHei',sans-serif
       background: '#fff'
       order:  # 卡片排序, 数值越小，越在上面
-      social:
-        - icon: fas fa-rss
-          url: https://facebook.com/mcgscofield
-        - icon: fas fa-envelope
-          url: gmscofield123@gmail.com
-        - icon: fab fa-github
-          url: https://github.com/gmscofield
-        - icon: fab fa-qq
-          url: tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1023975367
+      # social:
+      #  - icon: fas fa-rss
+      #    url: https://facebook.com/mcgscofield
+      #  - icon: fas fa-envelope
+      #    url: gmscofield123@gmail.com
+      #  - icon: fab fa-github
+      #    url: https://github.com/gmscofield
+      #  - icon: fab fa-qq
+      #    url: tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1023975367
     # ---------------------------------------
     side_toc:
       on: true
@@ -198,7 +198,7 @@ swiper:
   defaultVideo: '' # video，min-width:992px show
   defaultVideoLoadingImg: 'https://img14.360buyimg.com/ddimg/jfs/t1/175057/18/19582/882056/60ee7ac8Ef0045710/202d2ad878684a3b.gif' # video loading img -- use .gif img, 视频预加载动画，使用gif图片作为loading，为空则视频没有预加载动画
   defaultTile: '竹影疏风' # 标题
-  defaultDesc: ['万般付之一笑，共偕老'] #描 述，例如 ['煮酒洗净尘嚣，论知交', '万般付之一笑，共偕老']
+  defaultDesc: ['煮酒洗净尘嚣，论知交'] #描 述，例如 ['煮酒洗净尘嚣，论知交', '万般付之一笑，共偕老']
   defaultLeftBtnText: '顶峰相见' # 左边按钮文字, 空字符串则不显示
   defaultLeftBtnLink: 'https://jiachangguo.github.io' # 左边按钮链接 
   defaultRightBtnText: '' # 右边按钮的文字，空字符串则不显示
@@ -372,7 +372,7 @@ notice:
      - title: '博客开始营业！'
        date: '2023-08-06'
     #   url: '/archives'   # 可以为空, 也可以是本地页面地址如 '/archives'
-       color: red   # 字体颜色
+    #   color: red   # 字体颜色
     # - title: '#新增 轮播图支持三种模式了，功能也增强了 ~'
     #   date: '2021-04-28'
     #   url: 'http://baidu.com'
@@ -610,17 +610,18 @@ color_scheme:
 site_footer:
   # 通过layout控制页脚元素的显示和顺序
   # busuanzi是访客数那个,假如说你想在 social和 copyright中间加一个自定义内容, 可以这样写 layout: [social, aaa ,copyright, busuanzi, custom], 然后在下面写上aaa: 'markdown格式', aaa这个名称随便取
-  layout: [copyright, custom]
-  # social:
-    # - icon: fas fa-rss
-    #   url: /atom.xml
-    # - icon: fas fa-envelope
-    #   url: mailto:1730241541@qq.com
-    # - icon: fas fa-github
-    #   url: https://github.com/yuang01/hexo-theme-bamboo
-    # - icon: fas fa-qq
-    #   url: tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1730241541
+  layout: [social, copyright, text, custom]
+  social:
+      - icon: fas fa-rss
+        url: https://facebook.com/mcgscofield
+      - icon: fas fa-envelope
+        url: gmscofield123@gmail.com
+      - icon: fab fa-github
+        url: https://github.com/gmscofield
+      - icon: fab fa-qq
+        url: tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1023975367
   copyright: 'Copyright © 2023 <a href="https://github.com/gmscofield">MScofield</a> | Powered by <a href="https://hexo.io/zh-cn/docs/">Hexo</a> | Theme <a href="https://github.com/yuang01/theme">Bamboo</a> '
+  text: '万般付之一笑，共偕老'
   custom: # 根据需要自行取消注释，label: 'markdown格式'，会在下面继续增加内容
     # - label: '<br>'
     # - label: '[Hello World](http://baidu.com)'
@@ -662,7 +663,7 @@ pjax:
   timeout: 5000    # The timeout in milliseconds for the XHR requests. Set to 0 to disable the timeout.
   banUrl:          # 被屏蔽的 url 地址将不启用 pjax 跳转，可以在控制台下使用 window.location.pathname 获取
       # - '/xxx'   # 注意， 后面不需要加斜杠，例如 '/about'
-      # - '/xxx'       
+      # - '/xxx'
 
 # 鼠标手势
 cursor:
