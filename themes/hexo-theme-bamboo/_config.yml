@@ -59,7 +59,7 @@ sidebar:
       background: '#fff'
       order:  # 卡片排序, 数值越小，越在上面
       social:
-        - icon: fas fa-facebook
+        - icon: fas fa-rss
           url: https://facebook.com/mcgscofield
         - icon: fas fa-envelope
           url: gmscofield123@gmail.com
@@ -148,7 +148,7 @@ sidebar:
           unit: '篇'
         runtime:
           on: true
-          data: '2020/01/01'    # 填写建站日期
+          data: '2023/08/06'    # 填写建站日期
           text: '已运行时间：'
           unit: '天'
         wordcount:
@@ -239,7 +239,7 @@ show_count: true
 
 # 打赏功能
 donate:
-  on: true
+  on: false
 donate_message: 你的赏识是我前进的动力
 # 支付宝打赏图片相对路径
 Alipay: 'https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp'
@@ -254,15 +254,15 @@ sharejs:
 # 鼠标点击特效
 cursor_effect:
   on: true
-  type: explosion  # fireworks: 礼花 | explosion: 爆炸 | love: 浮出爱心 | text: 浮出文字
+  type: fireworks  # fireworks: 礼花 | explosion: 爆炸 | love: 浮出爱心 | text: 浮出文字
 
 # 头部导航是否显示天气
 weather:
-  on: false
+  on: true
 
 # 全文搜索功能
 search:
-  on: true
+  on: false
 
 # 文章详情页底部显示上一篇文章和下一篇文章
 postNav:
@@ -295,7 +295,7 @@ snow:
 
 # 首页花瓣飘落效果--春天
 sakura:
-  on: false
+  on: true
   onlyPc: false # 设为true，只有pc端显示花瓣特效
 
 # 首页文章图片是否一左一右交错显示
@@ -369,10 +369,10 @@ notice:
   title: '公告'
   background: 'url("https://img10.360buyimg.com/ddimg/jfs/t1/166587/8/21344/72069/6088c24fEda5fdeb6/f9730ab637b7ca47.png")' # url("xxx") or red or #000 or rgba() ..
   list: # list相当于数组对象，[{title:'xx',date: 'xx', url: 'xxx', color: 'red'}]根据自己实际情况，增加或者删除
-    # - title: '#博客更新到2.0了'
-    #   date: '2021-04-28'
+     - title: '博客开始营业！'
+       date: '2023-08-06'
     #   url: '/archives'   # 可以为空, 也可以是本地页面地址如 '/archives'
-    #   color: red   # 字体颜色
+       color: red   # 字体颜色
     # - title: '#新增 轮播图支持三种模式了，功能也增强了 ~'
     #   date: '2021-04-28'
     #   url: 'http://baidu.com'
@@ -396,7 +396,7 @@ notice:
 
 # 文章置顶
 topArticle:
-  on: true
+  on: false
   background: 'rgba(255,255,255,1)' # url("http://xxx.png") or red or #000 or rgba() ..
 
 # 归档，标签，分类页图片上的打字效果
@@ -463,7 +463,7 @@ gitalk:
 
 # utterance 评论  官网：https://utteranc.es/, 建议用这个评论
 utterance:
-  on: true
+  on: false
   # 仓库名字，格式：你的用户 ID/ 仓库名称，如：yuang01/yuang01.github.io
   repo: 
   # 主题
@@ -533,7 +533,7 @@ tagDetail:
   title: 'tag'
   img: 'https://pic1.zhimg.com/80/v2-604a15cef201cf177943af2d915eb2e7_1440w.jpg?source=1940ef5c'
   desc: '愿你如风，被人温柔以待' # 标签页详情上上面的图片上的文字
-  full: false
+  full: true
   video: ''
   background: '' # red or rgba(255,255,255,0.8) or other color or url("http:xxx.png")
 
@@ -542,7 +542,7 @@ categories:
   title: 'categories'
   img: 'https://pic2.zhimg.com/80/v2-7c496c95897fb15768593cc5170c8b1a_1440w.jpg?source=1940ef5c'
   desc: '愿你如风，被人温柔以待'
-  full: false
+  full: true
   video: ''
   background: '' # red or rgba(255,255,255,0.8) or other color or url("http:xxx.png")
   titleColor: '' # 标题字体颜色
@@ -620,7 +620,7 @@ site_footer:
     #   url: https://github.com/yuang01/hexo-theme-bamboo
     # - icon: fas fa-qq
     #   url: tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1730241541
-  copyright: 'Copyright © 2019 - 2020 <a href="https://github.com/yuang01">yuang01</a> | Powered by <a href="https://hexo.io/zh-cn/docs/">Hexo</a> | Theme <a href="https://github.com/yuang01/theme">Bamboo</a> '
+  copyright: 'Copyright © 2023 <a href="https://github.com/gmscofield">MScofield</a> | Powered by <a href="https://hexo.io/zh-cn/docs/">Hexo</a> | Theme <a href="https://github.com/yuang01/theme">Bamboo</a> '
   custom: # 根据需要自行取消注释，label: 'markdown格式'，会在下面继续增加内容
     # - label: '<br>'
     # - label: '[Hello World](http://baidu.com)'
