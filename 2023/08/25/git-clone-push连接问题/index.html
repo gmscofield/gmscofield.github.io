@@ -356,13 +356,13 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <p>嗯，纯粹水一篇blog（不然开始到现在一篇技术相关的都没写也太尬了！）</p>
+        <p>嗯，纯粹水一篇blog（<span class='p red'>不然开始到现在一篇技术相关的都没写也太尬了！</span>）</p>
 <p>这篇文章主要讨论一个老问题的解决方案。</p>
 <p>由于众所周知的原因，国内git clone&#x2F;push经常会因为网络连接原因失败。这里简单介绍两种解决方案。</p>
 <h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>下面以windows系统为例。（因为我的服务器上似乎没出现过这类问题）</p>
-<h4 id="找到合适的ip"><a href="#找到合适的ip" class="headerlink" title="找到合适的ip"></a>找到合适的ip</h4><p>强烈安利一个网站：<a target="_blank" rel="noopener" href="https://www.ping.cn/dns/github.com">ping.cn</a>。</p>
+<h4 id="找到合适的ip"><a href="#找到合适的ip" class="headerlink" title="找到合适的ip"></a>找到合适的ip</h4><p>强烈安利一个网站：<a target="_blank" rel="noopener" href="https://www.ping.cn/dns/github.com">ping.cn</a>（<span class='p red'>我承认它有一种钓鱼网站的既视感，但是真的很好用！！！</span>）。</p>
 <p>在网站的DNS查询里面输入github.com，找到解析时间最短的ip地址，记住，下面要考。</p>
-<h4 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h4><p>在C:\Windows\System32\drivers\etc文件夹下修改或者添加host。</p>
+<h4 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h4><p>在<code>C:\Windows\System32\drivers\etc</code>文件夹下修改<code>host</code>文件。</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  一般格式：ip+空格+github.com，切记不要加www，下面的ip是我瞎写的</span></span><br><span class="line"><span class="number">192.30</span>.<span class="number">255.112</span> github.com git </span><br></pre></td></tr></table></figure>
 
 <p>刷新配置：</p>
@@ -373,6 +373,11 @@
 <h3 id="无脑方法"><a href="#无脑方法" class="headerlink" title="无脑方法"></a>无脑方法</h3><p>嗯，我冲了两年会员才发现这个方法。</p>
 <p>点击运行Clash for Windows，第一行有个端口，右边有个命令行的小图标，点击一下就可以用魔法修改后的命令行窗口了。</p>
 <span class='p red'>官方说了不准宣扬所以不敢放图，sad...</span>
+
+
+
+<p>闲扯一句，之前听某17级的老哥说，在他大一那年，学校的校园网还是提供了魔法给同学们使用的，但是他大二的时候因为某些众所周知的原因就被ban了，结果现在只能八仙过海各显神通。。。</p>
+
       </div>
       <div class="post-tags-categories">
         
