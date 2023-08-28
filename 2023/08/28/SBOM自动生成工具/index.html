@@ -332,7 +332,7 @@
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> 发表于：2023-08-25 |
+          <i class="fas fa-calendar"></i> 发表于：2023-08-28 |
         </span>
       
 
@@ -358,7 +358,89 @@
       <div class="post-content">
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>做了这么久了，感觉再不出点成果之类的要被老师push了qaq…</p>
 <p>总结一下目前比较流行的几种SBOM自动生成工具。</p>
-<h2 id="Syft"><a href="#Syft" class="headerlink" title="Syft"></a>Syft</h2><h2 id="Salus"><a href="#Salus" class="headerlink" title="Salus"></a>Salus</h2><h2 id="Dependencytrack"><a href="#Dependencytrack" class="headerlink" title="Dependencytrack"></a>Dependencytrack</h2>
+<h2 id="Salus（Microsoft-Sbom-Tool）"><a href="#Salus（Microsoft-Sbom-Tool）" class="headerlink" title="Salus（Microsoft Sbom Tool）"></a>Salus（Microsoft Sbom Tool）</h2><blockquote>
+<p>The (Microsoft) SBOM tool is a highly scalable and enterprise ready tool to create SPDX 2.2 compatible SBOMs for any variety of artifacts.</p>
+</blockquote>
+<p>该工具适用于Windows、Linux和Mac。只能生成SPDX2.2格式的SBOM。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p><a target="_blank" rel="noopener" href="https://github.com/microsoft/sbom-tool">Github仓库</a>里面有安装命令，直接按照步骤走就能用了。</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sbom-tool generate -b &lt;drop path&gt; -bc &lt;build components path&gt; -pn &lt;package name&gt; -pv &lt;package version&gt; -ps &lt;package supplier&gt; -nsb &lt;namespace uri base&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>drop path</code>用来放置生成的SBOM文件的路径，<code>build components path</code>用来放置源文件夹，<code>namespace uri base</code>用来表示<a target="_blank" rel="noopener" href="https://spdx.github.io/spdx-spec/v2.2.2/document-creation-information/#65-spdx-document-namespace-field">命名空间</a>，其他参数看名字能知道意思。（实测参数随便乱填也能生成SBOM，虽然生成出的SBOM不一定正确）</p>
+<blockquote>
+<p>“命名空间”（namespace uri base）：每个 SBOM 都有一个唯一的命名空间，用于唯一标识 SBOM，我们为 SBOM 内的命名空间字段生成一个唯一标识符，但是我们需要一个对整个组织通用的基本 URI。</p>
+</blockquote>
+<p>使用以上命令即可生成一个SPDX2.2格式的SBOM。<span class='p red'>值得注意的是，后面跟的六个参数缺一不可。。。微软的SBOM工具可能更多是提供给软件开发者使用（而不是软件使用者），因为部分要求提供的参数（比如命名空间）使用者并不一定了解相关信息。</span></p>
+<p>Salus有两种输入：</p>
+<ol>
+<li>可执行文件（容器镜像，container image）</li>
+<li>源代码（文件目录，directory）</li>
+</ol>
+<p>Salus输出格式：spdx-json</p>
+<p>Salus生成的 SBOM，包含了基于 SPDX 规范的四个主要部分：</p>
+<ol>
+<li><p>文档创建信息</p>
+<p>例如软件名称、SPDX 版本 &#x2F; 许可证、文档创建者、创建时间等。</p>
+</li>
+<li><p>文件部分（files）</p>
+<p>组成软件的文件列表，每个文件都包含有一些属性、以及 SHA-1 &#x2F; SHA-256 内容哈希值。</p>
+</li>
+<li><p>包部分（packages）</p>
+<p>构建软件时使用的包列表，每个包都具有名称、版本、供应商、哈希值、包 URL（purl）、软件标识符等属性。</p>
+</li>
+<li><p>关系部分（relationships）</p>
+<p>SBOM 不同元素之间的关系列表，比如文件和包。</p>
+</li>
+</ol>
+<p>这里展示一下我使用Salus生成SBOM的具体操作以及效果。</p>
+<p><img src="/../pic/sbom-tools/salus1.png" class="lazyload placeholder" data-srcset="/../pic/sbom-tools/salus1.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp"></p>
+<p>扫描的软件包是NPM软件包nunjucks，源文件夹中的软件包是直接从官方给的代码仓库中clone下来的。可以看出检测的结果相对来说比较合理，检测出了四个NPM软件包组件，并且将分析出的SBOM结果以json格式保存到了输出文件夹中。</p>
+<p>生成出的SPDX2.2格式的SBOM如下图所示（原文件太长了，只截屏了一部分）：</p>
+<p><img src="/../pic/sbom-tools/salus2.png" class="lazyload placeholder" data-srcset="/../pic/sbom-tools/salus2.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp"></p>
+<blockquote>
+<p>注：只能说不知道微软官方是怎么使用这款工具的，其实我感觉到现在也没太摸索明白。在github仓库中，微软官方给了一个自己生成的SBOM样例，是为微软这款SBOM tool生成的SPDX2.2格式的SBOM。然而从我这边为他的工具生成的SBOM始终与sample文件夹中微软给的SBOM示例不太一样。猜想是和相关组件的SBOM有关，这个问题在后面介绍这款工具生成SBOM的原理时会给出一点解释。</p>
+</blockquote>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><span class='p red'>SBOM tool通过扫描源文件夹以搜索 *.csproj 或 package.json 等项目文件，以查看使用哪些组件来构建包。</span>该工具使用[组件检测](https://github.com/microsoft/component-detection)来扫描组件和依赖项，访问其 Github 页面以获取有关支持组件的更多信息。包名称和版本代表 SBOM 正在描述的包。
+
+<blockquote>
+<p><strong>组件检测</strong> (CD)是一种包扫描工具，旨在在构建时使用。它生成跨各种软件包生态系统的所有检测到的组件的基于图形的输出（其实就是第一张截图里面的表格）。</p>
+<p>组件检测还可以用作库来检测您自己的应用程序中的依赖关系。</p>
+</blockquote>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>优点：</p>
+<ol>
+<li><p>可扩展性强</p>
+<p>提供开发者api，同时可以部署在Windows、Linux和MacOS上。</p>
+</li>
+<li><p>提供了SPDX相关格式的说明</p>
+</li>
+<li><p>可以通过<strong>联网</strong>来获取依赖项的有关信息</p>
+</li>
+<li><p>用户可以自己提供SPDX中的信息</p>
+</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li><p>生成的SBOM数据格式过少（只有SPDX）</p>
+</li>
+<li><p>不支持扫描文件或包来获取许可证信息（<strong>相关工作正在推出</strong>）</p>
+</li>
+<li><p>运行时无法忽略.git文件夹</p>
+</li>
+<li><p>无法分析可执行文件（容器镜像）</p>
+</li>
+<li><p>对源文件夹要求过高（来自<a target="_blank" rel="noopener" href="https://github.com/microsoft/component-detection/blob/main/docs/feature-overview.md">组件检测特征概览</a>）</p>
+<p><img src="/../pic/sbom-tools/salus3.png" class="lazyload placeholder" data-srcset="/../pic/sbom-tools/salus3.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp"></p>
+</li>
+<li><p>完整的依赖关系树被扁平化，而不是保留其原始结构</p>
+</li>
+<li><p>运行部署难度较大</p>
+<p>该工具要想正确运行，需要提供大量命令行参数</p>
+</li>
+<li><p>很多包在分析时并没有正确分析出package部分</p>
+</li>
+<li><p>对软件包的分析生成的SBOM中错误信息较多</p>
+</li>
+</ol>
+<h2 id="Syft"><a href="#Syft" class="headerlink" title="Syft"></a>Syft</h2><h2 id="Dependencytrack"><a href="#Dependencytrack" class="headerlink" title="Dependencytrack"></a>Dependencytrack</h2>
       </div>
       <div class="post-tags-categories">
         
@@ -379,7 +461,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>文章链接:  </strong>
-    <a href="/2023/08/25/SBOM自动生成工具/" target="_blank" title="SBOM自动生成工具">http://gmscofield.github.io/2023/08/25/SBOM自动生成工具/</a>
+    <a href="/2023/08/28/SBOM自动生成工具/" target="_blank" title="SBOM自动生成工具">http://gmscofield.github.io/2023/08/28/SBOM自动生成工具/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明:   </strong>
@@ -397,42 +479,22 @@
 
 
 
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-    </div>
-    <a href="/2023/08/26/%E5%A4%A7%E4%B8%80%E5%92%8C%E5%A4%A7%E4%BA%8C/" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">大一和大二</div>
-      </div>
-      
-      <!-- <div class="content">
-        
-  2f490f9e0d18b7eca91f7ddffc4ffa1d642173dffdec2163bdd17bef7
-      </div> -->
-    </a>
-  </div>
-
 
 
   
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload lazyload placeholder" src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
     </div>
-    <a href="/2023/08/25/git-clone-push%E8%BF%9E%E6%8E%A5%E9%97%AE%E9%A2%98/" class="post-nav-link">
+    <a href="/2023/08/28/Diary2/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">git clone/push连接问题</div>
+        <div class="title-text">Diary2</div>
       </div>
       <!-- <div class="content">
-        嗯，纯粹水一篇blog（不然开始到现在一篇技术相关的都没写也太尬了！）
-这篇文章主要讨论一个老问题的解决方案。
-由于众所
+        
+  db5704fda4569ce1edd5d5b368874bea3740f75fdd841892dc8358a55
       </div> -->
     </a>
   </div>
@@ -529,7 +591,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Syft"><span class="toc-text">Syft</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Salus"><span class="toc-text">Salus</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dependencytrack"><span class="toc-text">Dependencytrack</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Salus%EF%BC%88Microsoft-Sbom-Tool%EF%BC%89"><span class="toc-text">Salus（Microsoft Sbom Tool）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Syft"><span class="toc-text">Syft</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dependencytrack"><span class="toc-text">Dependencytrack</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -555,6 +617,27 @@
       <!-- hash算法 -->
       
       <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2023/08/28/SBOM%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-28</span>
+                
+              </div>
+              <a class="post-title" href="/2023/08/28/SBOM%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/">SBOM自动生成工具</a>
+            </div>
+          </div>
         
           <div class="aside-list-item">
             
@@ -637,27 +720,6 @@
                 
               </div>
               <a class="post-title" href="/2023/08/27/%E5%88%AB%E4%BA%BA%E5%AE%B6%E7%9A%84%E5%A4%A7%E5%AD%A6%E7%B3%BB%E5%88%97%E2%80%94%E2%80%94%E5%89%8D%E8%A8%80/">别人家的大学系列——前言</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2023/08/26/%E5%A4%A7%E4%B8%80%E5%92%8C%E5%A4%A7%E4%BA%8C/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">08-26</span>
-                
-              </div>
-              <a class="post-title" href="/2023/08/26/%E5%A4%A7%E4%B8%80%E5%92%8C%E5%A4%A7%E4%BA%8C/">大一和大二</a>
             </div>
           </div>
         
