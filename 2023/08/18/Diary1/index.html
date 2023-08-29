@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html>
+  <!-- meta/link... -->
+  
+
+
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+  <title>Diary1 | MScofield&#39;s blog</title>
+
+  <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
+  <link href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="/js/swiper/swiper@5.4.1.min.css" rel="stylesheet">
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/animate.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+    <link href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" rel="stylesheet">
+  
+  
+    
+<link rel="stylesheet" href="/js/shareJs/share.min.css">
+
+  
+  <style>
+        @media (max-width: 992px) {
+            #waifu {
+                display: none;
+            }
+        }
+    </style>
+    <script defer src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+    
+    
+    <!-- 依赖于jquery和vue -->
+    
+        <script src="https://unpkg.com/jquery@3.5.1/dist/jquery.min.js"></script>
+    
+
+    
+        <script src="https://unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
+    
+
+    <!-- import link -->
+    
+        
+            
+        
+            
+        
+    
+    <!-- import script -->
+    
+        
+            
+        
+            
+        
+    
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  
+  <!-- 预加载动画 -->
+  <!-- 页面预加载动画 -->
+
+  
+    <div class="preloader_2" id="loader">
+  <div class="loader"></div>
+</div>
+
+  
+<script>
+  var endLoading = function () {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loader').classList.add("loading");
+  }
+  window.addEventListener('DOMContentLoaded',endLoading);
+</script>
+
+  <body>
+    <!-- 判断是否为暗黑风格 -->
+    <!-- 判断是否为黑夜模式 -->
+<script>
+  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+
+  if (isDark) {
+    $(document.body).addClass('darkModel');
+  }
+</script>
+
+    <!-- 需要在上面加载的js -->
+    <script>
+  function loadScript(src, cb) {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var HEAD = document.getElementsByTagName("head")[0] || document.documentElement;
+        var script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        if (cb) {
+          if (JSON.stringify(cb)) {
+            for (let p in cb) {
+              if (p == "onload") {
+                script[p] = () => {
+                  cb[p]()
+                  resolve()
+                }
+              } else {
+                script[p] = cb[p]
+                script.onload = resolve
+              }
+            }
+          } else {
+            script.onload = () => {
+              cb()
+              resolve()
+            };
+          }
+        } else {
+          script.onload = resolve
+        }
+        script.setAttribute("src", src);
+        HEAD.appendChild(script);
+      });
+    });
+  }
+
+  //https://github.com/filamentgroup/loadCSS
+  var loadCSS = function (src) {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var link = document.createElement('link');
+        link.rel = "stylesheet";
+        link.href = src;
+        link.onload = resolve;
+        document.getElementsByTagName("head")[0].appendChild(link);
+      });
+    });
+  };
+
+</script> 
+
+<!-- 轮播图所需要的js -->
+<script src="/js/swiper/swiper.min.js"></script>
+<script src="/js/swiper/vue-awesome-swiper.js"></script>
+<script src="/js/swiper/swiper.animate1.0.3.min.js"></script>
+
+<script type="text/javascript">
+  Vue.use(window.VueAwesomeSwiper)
+</script>
+
+
+  <script src="/js/vue-typed-js/index.js"></script>
+
+
+<!-- 首页的公告滚动插件的js需要重新加载 -->
+<script src="/js/vue-seamless-scroll/index.js"></script>
+
+<!-- 打字机效果js -->
+<script src="https://unpkg.com/typed.js@2.0.11"></script>
+
+
+    <div id="safearea">
+      <main class="main" id="pjax-container">
+        <!-- 头部导航 -->
+        
+<header class="header  " 
+  id="navHeader"
+  style="position: fixed;
+  left: 0; top: 0; z-index: 10;width: 100%;"
+>
+  <div class="header-content">
+    <div class="bars">
+      <div id="appDrawer" class="sidebar-image">
+  <div class="drawer-box-icon">
+    <i class="fas fa-bars" aria-hidden="true" @click="showDialogDrawer"></i>
+  </div>
+  
+  <transition name="fade">
+    <div class="drawer-box_mask" v-cloak style="display: none;" v-show="visible" @click.self="cancelDialogDrawer">
+    </div>
+  </transition>
+  <div class="drawer-box" :class="{'active': visible}">
+    <div class="drawer-box-head bg-color">
+      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/logo.png" class="lazyload placeholder" data-srcset="/medias/logo.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <h3 class="drawer-box-head_title">MScofield&#39;s blog</h3>
+      <h5 class="drawer-box-head_desc">天生我材必有用</h5>
+    </div>
+    
+    <div class="drawer-box-content">
+      <ul class="drawer-box-content_menu">
+        
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDrawer',
+    data: {
+      visible: false,
+      top: 0,
+      openArr: [],
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      isOpen(index) {
+        if (this.openArr.includes(index)) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      openOrCloseMenu(curIndex) {
+        const index = this.openArr.indexOf(curIndex);
+        if (index !== -1) {
+          this.openArr.splice(index, 1);
+        } else {
+          this.openArr.push(curIndex);
+        }
+      },
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'width: 100%; height: 100%;overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      }
+    },
+    created() {}
+  })
+</script>
+
+    </div>
+    <div class="blog-title" id="author-avatar">
+      
+        <div class="avatar">
+          <img src="/medias/logo.png" class="lazyload placeholder" data-srcset="/medias/logo.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+        </div>
+      
+      <a href="/" class="logo">MScofield&#39;s blog</a>
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        
+      </ul>
+      
+      
+
+    </nav>
+  </div>
+  
+  
+    <div id="he-plugin-simple"></div>
+    <script>
+      WIDGET = {
+        CONFIG: {
+          "modules": "012",
+          "background": 5,
+          "tmpColor": "4A4A4A",
+          "tmpSize": 16,
+          "cityColor": "4A4A4A",
+          "citySize": 16,
+          "aqiSize": 16,
+          "weatherIconSize": 24,
+          "alertIconSize": 18,
+          "padding": "10px 10px 10px 10px",
+          "shadow": "1",
+          "language": "auto",
+          "borderRadius": 5,
+          "fixed": "false",
+          "vertical": "middle",
+          "horizontal": "center",
+          "key": "2784dd3fcb1e4f0f9a9b579bf69641f2"
+        }
+      }
+    </script>
+    <script defer src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script> 
+    
+</header>
+        <!-- 内容区域 -->
+        
+ <!-- prismjs 代码高亮 -->
+ 
+
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+
+
+  <!-- 文章详情页顶部图片和标题 -->
+
+
+
+
+<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp')">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
+  
+  <div class="post-detail-header_info-box">
+    <div class="title-box">
+      <span class="title">
+        Diary1
+      </span>
+    </div>
+    
+    
+      
+        <span class="post-detail-header_date">
+          <i class="fas fa-calendar"></i> 发表于：2023-08-18 |
+        </span>
+      
+
+      
+
+      
+    
+  </div>
+  
+  
+    <script src="/js/bubble/bubble.js"></script>
+  
+</div>
+
+
+
+
+
+<div class="post-detail-content post-row" 
+  style="padding-top: 0px;">
+  <div class="main-content">
+    <article class="post post-detail">
+      <div class="post-content">
+        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉，这个密码看着不太对，请再试试。" data-whm="抱歉，这个文章不能被纠正，不过您还是能看看解密后的内容。">
+  <script id="hbeData" type="hbeData" data-hmacdigest="bb0689ab5d1cc61bcf0e8f01c06221de9da05c5692109d6232b107b82e71095d">db5704fda4569ce1edd5d5b368874bea3740f75fdd841892dc8358a55c775736037ccde1a241bd024d4d39383b6226af957ebf221dd6725302eb9fc6ec9baa30fda1d2fc1f3ae0d5e570f5f14ed83f969369904bc2665cbcf58b41dd487237b72f79a1e9138fd5f02eff15499c09782f7a3ae5d731ca901ea4a4099b59e7ff7903982374565421f4c0b2dd7fbd0c1ebbb7fe9e17a1c63dd76147f08aa7ed4ad45a7152ef456926836b770fda0627c3a7e9c819b9f973af49ea6db2c594690a224826f34c5622ff110fbdb002a3cb9d056945c814f6b36873fb41f6616c8bdbb7ebacb43d5cc22a96d33d83cf1e9fdf1e38249265ab979dad8c3d6aefff2fcac501e35531605a1e6a038f1b49421f0b824c40dfddb84c2adff96f6dfe6570b94d50257355c072d5253d3db9c72c7b473025627d1f2f2d6221255a6219445a4a9c8ae2b5fb0a77c8d2bdb655af64eff9454ca239f2325e63517d03155c7a8520a74384907c4f6bbd5d2a4b436cab4534aae8b6a23b4eb07699063df0cdc26a03edfdd2e229930ad5d47f3b1008c3319bcd59a03f93f0cdedd7a34fcf32d2011f900ec7b3823a20f6a2fa785ef4dc6ee28868fc10b5be63f07b6981409dcf3d53e9e272f984a0f3f442253b8f489cef1b4edf4cbf88f175ecefded3341992b8d4a3054a593a85772c9ffebea3cf47920e850a55f35413cc80de1ae14b69e5f7cb9ac24269b0d693f5e75c302baadacd618a0c155efdb78c3b099bb20bf5eebd33756fd987f575e84230644b4458fe01e5ae3d8f9b21dda6cff205fdf5a91e41b9141a659dc8174afb2c13c42cee97b5a8cb1d1ee634b586a47eaba7abcd20302e4f1711c510a9221e1b33d7912700e97ebfd566bcf0d47b6f1cb0b14dcc43c599a1680323a86429abf8499883964672e0b35ec62b16b1924291d7b618e89111fab0182d3185a248c0d6a93225a7acea29a88dd32c49af672c5c84c042f7bcd533a0792e2dea52c5c1c8befa92462867914c939cf643160d16028319802b1727e517360fdb7e36cd2537f9f0353e23a3659ce0538e525ca1385a621eb77539293be9c3c64b005ec38c9aa54f0568902ab00a3a88314dd866b5d7261a6599c4d7d9a086812a0d1b1a51da0e7f223addaea15fa7c68e714a4d1cd9f20e82208d47e52c3bd73ab241597ff82323227ba9f5b17d64f6eab00cdb8fe01b9c0f0dfb547de725c8469ad99739bd598ef296e90af5cd423af570feb0f8cadf6932d198d55f53fcfc566225160fbdaf5131576a11ce83673537ed4c56fc387ad26616fe860f93f955e7bbf857cf859e6544758abf4fc936630df86aeeb29cde4b85382f65b08ede82e76f9a4613445fc7e4e942aa73660bb9641ac57bcbf34a204e167dba2745729b9ad4b52b9e08fac50ad2626e447de58d7419fe5afef70b4c2a4e071a6f9736157c8bfb5a2224b9e988d97d3c83371468bd32d8cbc6bb22b19e83456ac5da2b81145e7aaf78269ea0733b8e4bc3ae83da9b8a3f6c8712e2c374fa0aca9a89154992b32c5b6a8db14f7e217f90be963055db3bcb2d2c87b8e73b9c760ba35a66c120dd387ea2b97926a643a43932ab917033f6bc3061fedf942b667eb0f0e8a463b3649e35e638531940d734520c6a9ffe8c78a4b5f8084e65a6004d9230976e636a920b6821b2e44264a04c80c96486a84bab48a566164aa120e15cba07d9f814d852efbc92430df882ffd5309034cd796fbff44c5b888e23da5c55a4fb3892232dfa4ac5e296bdc008164b94dcac99d9ee9515cc7d09480e83fcd391d3f2f21ab93c73f3371514b20d87d29d111a616b4821772d1197d816df54443136e7a7f4ee6d34f29fd66aea60e824eb51ba76b1417c2c182daf523f3a7360b88ca91e061fc42a8d1853ee52de2c5307418dd7f0c68fdba1903d0730d1e045bac717633533a3557357d4ade063d72e7ea6d15ce7cf0159a61ae08b4f58fab209f196a8e5d90aa0e2674a3387fb438dc6fb6fa137694678fa59e0b054d691090aedb19eeff25e8538fd1315f6224f6c3e2cb2d90baf588e5d51915ee0d4d17645b995dfe475dbec01223faf28600921a7226fb6b1875db0dc428b885186f4e14d351057fb8a5e398c3271f1456ada5adc2ce25fd357ec7f125f81ccafa84344bf32b10ec1242aded0eb847c757b358f19aa0a5b30a5171548cef0a62665fb245357e57c1b8f598259b74e49146b85e481e6fd687d97ac1876d13e273395f785ed9fae94d5e71ddd69151cf8f539615d9b0fb5f4502b1008eda7b90fd43df3b19a761d23981ffeb66aa9ef69ff4f252e56681c412684d42ec15a3ff2a33379049f4d13d0c57a04328bcc9dc4b2f90219a2be6404b20dd0d8dd2dec8981bb8994273a55ac8d83a327f348c1ef43bf6c64f53ae14d0dbbe03fb2041348abd285d5f769c6c97ea05b74ec34fbfd21ee68d2256a4072b41c34cc00cb0825f0f0ae0203548f7bd2c308c22eccb7246049a67349efa13961083f635db1bd2ab55314f6bdbf03f819c49a2e77ad8b65696a71c930119301ea1a77d48d07d45a40b14ed619e36e751984310bc8dd90a5682b2e050b26c162b8e5a0a8b7733dbc5996745f1d69cc5d69b9a9fe901c574d0e265e0a8daae344379d9c4edf1ac04f4d3d20bfef1e0afe4ccd9093ad64b24d2bc72f6dc8cd98bd6715eb8e072c3ca52f093c2667f65d24dc291f3c13fd55df007787eeb71276acf8224bb84d99e499aebd368756ad16c6ff54d6b2119e18ee380affc30745b52677e91e1108b597617f769893f594b9421bb1918f387ae31a49bcf0ce18154299f6be1e9cd9423c9ec93c1f29626252eff907586da21ea4412ae49db2439da0cce3650653574470e1121bca537754ca5d56fabb7e7569f81128397a7e8a3ea342cc26666428509e68bc7235ee19dca44b76afacff9950021dbe94498d555768f718d5ab7adfc5a1746f2ed7ee744cbfb78e39098bb54d2d133e73580561a0fb143f06b9ee3f6755f827c5b1530b5cab93b79bd4f6a1ad2957841f73a2e32a39dd0589017c101264c0a1bb52f19d653c80ef23547db1a4d834b07a752a9adb0c1079ef93101e7b477122aeaae413cd492ad031d70943a455e0ad52464ad88f451db492c2e1b550835602f4df43e565e8d2a4db515e9420c07364b8c81c3f286b632bc2893c63b1e8c0a4cbebc70c76160ab449e632a39ae4206e87e426cff2fa93e2c4ed799fab1d8951f340be27585ab61f6c3e0bac2a6ea5e2290775f10bf68ac6f07589817335d5f5f1f0a72ca30dd10bf35fb6b06e83291a9a2055b95ff70e030e808e7d09b51da565fdb64476320aa6419dfeb999c0b75495aba8787601a5744db4eb814ff1ec63f505b16ed0c4af5ff3b9834b33e7335d0148f05a07c1b9c268ea7424528ab9c006c2f82d3d9ca37c8f20f9b95a4bf72c6668a50dbacccdcecd06954d61b2d1d3319d37e568305d24e2544232cf7899bad1f511d93065a7f865e54b64a5672770895552a0b306b3af3ebc165183a6699294c2b51034954e5f2a56f292eed5331b275c8558d683c98f139b0b8e10de4bc4ef3db5a784b99d5e147a85a5576d71e1cd4369852da44c4d82edb1d4086f3204a19f5006a49710ff635136f10da84d77ab1baeec2ae4a86c2f5b9d01463b448f22d202cca5643230be6e1e565a3333b0e67bc3ad54673e73b66c3152ed19d8cd71b17b8d93ec7ab4c81cfdf7a47ba071d70763bec44485fe84c6ca96bfc4cf8795533e851f57a0e69582dd5957efabb76ab6bf4370a9970687557cd424eac8de5f25a408400d9c27e347191f89cce039c5403334ba5a05224202ac44f8dd2335b1cba4a634eb05c69f9caaee0f8acfec5fa2f217efc58f493148a81744569684e870f17d7cc06ef556e77b5f67aea9eadbef3975b0b1d280eabf5039a75b89869731652130605e39c97803da6f5efa800cbbc133bac6613d7b4a58ab7a598145ab0f079c8c0f45311cdf1bf65ef61c57deb97caf2245802a039cffc00ae93bf8684d3f8293fe20b51288d1774136ce7dd3b27f05b58a327018335f63c9744d2730731462e6625e837233f4d12422fb2ac8b67a6633d8292f3954aa0c108e97f453c581b690449d4b5365ddb394cb942e2552b7bb7f760e48a4fdd0f10ef070d58eb70dd8a57320f21bc984f61f3ca0f0031447498771a0ff62668b1da924e666cc653af39ca5dfcb39a7ff4c055c955ad578c94e9bc8bd635370e09661a32065ff23e0d5d022125fc14dfc14b72984dfa7d110a5c423055d9fc17caada6027d41a51b84126a901ee83ddddaf71c684f3ac85546011f20135d78f255202d7747bbd6fc73d03708b06d9e1c2bc4e8d83fc8d3db366f94ac2a44acf3b4d2cbca93c4503d9711f02a0dcb78dc3391627f7777a9e209c1b2ba6090bf73441a495cfce6607e04ebe180a70be8be5d5e7f7c8b0be75e791d6ad659787ead99e8514976201689239bb4638f27ef6c5fbe1d85f242aa596d3e012d1ff717f4cd0c02a41ff2e837d2bafb275bccb102266a3d3bc31f604da456b9adb0e2cc628385882c3b0456cf6314f3eff2694b0a393fcda2eaac2cedb66f526f1bec08f192fd318a35c5e7816d16d08448724f6a509ab37a01eac74f87b1f55dba8fe5fd58a428f52fdd6f79e6081134527774519957b9a584d1caf214f3c319685b4773f218a1ca3217f4fc321a735c996523533be6bdf275afc334da594dfafebbb87f1e6ba56102212f64aed25c85b3bcdefa9b37f584c2ce7efb6364b3357ed7df8e80007dcd4f11ea62243515a7ed1513fc786b874fe5a91ad914ba8a87c0d501c5aab939a51d30447784f2e6f12a0072bb65b746b5ec86ba39393312200ab8230d4a2c334d971b798ed2f8cbc73431deedec9b3ea2ce8371a308dd664c789f36d013ac81c50c2955516eb9bee73482707ffaf281c82308c4ecfc6406291941f083fe8f7d86c759bb622006556c2b30e85123a6ce42fcd2739eb9366076d7576f25fee021fd7b2f9742271726d02694cc85e382ba25c3bb345eabc38556330b6f7e897742d71b306fa0b8e734f60d39e022c384b248ed3f0286df0ca5495d701fb78e85baaa6430739af551bf86b9532b1c7079978006194e340be4856283f6e6f83696d9ca865bc48e344fb84e6cae60c686953953e9f9c7ec0d818af8f2ee402fcdcf3dae0d4c4d65d2d990b898018806287ccf31c6b29d00f9a260e11d1c3631fa1e384523df6021dd7adea892b7291194046351f035dc4c2ca917cc24fc61e1781a673c6468190604acb10a43be81a946ce54efb8b76e9465b69fdba516bc73b4f1f08585caeb8587218c9f06cc7fc8d5f6e84196b86ebd7cf0a07680ba41bae82677a1e8eaf42b7d52ecae211f8057d8feede82aae2ec6667b6e668bd17ad648e5bad712ab612de1cee92a231faf8910b857a40ca1eb0072c85a7773f32dd3810632bb553e22b5daf78d234e117910daec0287b7312bf15462497a3ee91368fb0d673672653a0d658c34f794870a65d2a554aeb4cff59ed08c895b1f31043648bc772c30d1681326a4bc970550abb1237f7bd2980efea7d9813cd76aa98c856e3a870397c67b305808ceb20bef2ac0d22f62545a0b1190d120f7014a445756bea688a4b0f4416a20f7126c1e14d5a6b4b90554ef633daf8794a38591acbca2db336c454e7f0415704918974c2ba6a8012f80a73f8cf766e1aeb26292c380308ab5376984b8673c98789ea7ebbdcc9458a6513e20969f10df05955e81bb87845e310d19503dc1a2441724d4a52c9558b9dc683abee5cfb632aa8bd27aff837fe282597e545e7a8754eb8ce62ee1faaf3e1ece2e1fa517ab041fdb8446e9aa6236d3fe6d2dd89bcf5c4939d2ee6da182e1ae62ae9a30122b284a98974c06b861f81584c7adada089a77ea963a3a36cfe98541bd441582e9228d621f2dcebb221863e4d939be51e7b76a05f6d55febdbac75c0d251d6eb7cffa2e04299d3499320dc61d2eb0d2b6d241fb952cc6fa9f03c6d046123132e2aadd32456a2a9c00f00791aa5c329af2ef73f6d3f66473a7c4a8a79f49afdadeaf448b00dd01ba5155e83d10feb3de3a29d228d9d161eab5b58f3cf35add76739f33c6993bb1b8d3cab587841baff4c387edf430ead3f80310db5eea1310ee251d35860a141446f956046c6bb344f7f55dc5e1cf34aba8f4107ac7374900e0cc860a7b431e29240c59091e000f707e45496d53e5f323ffe665dfca01a44d123f4034cab287fe6bab2d4c32a178cd9b76b90e569c204f03cd69bce770d33f599fd200d56e45f57d258485a73658adedba40e714f4234d799590d86605e33b083e35bb1b720c91c2c3970c501f8581488ab729d2933c4872a562dacb2af9d87f0e3b1d2c65f29c4a51db737cde0043f312d3e5286d40ce542de563a0b9ec8e6f08edcf36861179702c3f9bb570bc5e4c26d7b530c875123f43838a2c17d0dbaed950bcd32e65e8aba044eafd9d2104fd7c66991e25bc46c7050adb8af96c0f26b0c557ab99031c715b1f9d98774164a35593da8601f8f6e6ca0995ef008136c40690ffbe3195a115396c5870f204e6ffad9888107f8e4d7eaa63384b59710e533a278838cb308c9a5a5d4baa740caf60fce8175d53e18c59e0a2bfff267a19d882829b248be368ddfc6d1cf8122076623a9c5885d2ccf02c10367874fbbdbe0422fe32974b12446d1c995a9dab8d1b0784dfb1bbafb6eb941dcda9362e7cd2abc4c85456e7f5a8129826663604bd6cbb937ec413b16bbd389a2ecc905b798bcfb2b4b23d264d17e5db00633fa364d81fbf68ac56bb1f79f49031db0c8f4b2bafd38eddcbd91f71de63ff93ecf024317dc34fbef0c12a832cab69213834deaf5a96ec25c582e43d9c7009a82c9252c3bb6734ef4037a703a8dad8cd2e9fd836834347fc5c3eba691caa3542112b583666f765a11f40bd46cd8926db5b232d615cc9f07642852f15f59deafb3a380cf5a861e5791e76789aeb364196e2e21e45f857a4074cea5294126531f508f0b7f319215f69defad873e64e35bb5269241b091184a0a29032f101cd65a5a1ed108cef3ca550285f6d20d306f035a8fafc3c7d812b2bfbde601c709147f8a0b4e237b22460e6474801db6ce02e184822ee68491727bddcb448b030b48bf189fcd1a82e065a3b88d8b9505663450d03a3a3fe8d7b320c380e48a9f8d6238be90ed471555e54670065b7095c679b2f918fcce2fe8e93445a0e142c5a522813ddee7aa8759e70c6c6c0952753c699dbebcf4fc859e41c65a12d74eb8b46cca7d24ae9ac1c95680a0a848b316e2dbd9021b4dc39c0125e74c34cd8b0f051f7bca267feb330d3e6d7b5e260a0cf6de2c21219867e6bd94b585e975560fc14371ddac8907485d26b4e2d4cf4ff6f6fcc19a4dd4e2955cb50041c1b5ae53da858700ca86d72dfbd03a64b4319457a6bba4283e34ec446e57e249c19ec37c84dd9f12c4338d97f3edcd95987d27f0e98f3de8faafc1f687d16c05eb585b51f32dc2309484b1586990f0a2250f6f8bf29565f6aa407484fd2c54ccf5fc5701c81496637680cb3394176cc1f1f86394fd15c41439c003b094490e5626b37b77a59a50bd0f64405bdae1b8b3a50ab2596fdd125ce8f754cbca45f01c4387a4a8b8905310d5db83151b835ef50e3e6a5b92b19765d53663d5e244ba326ced702225ef93a55c18259f0cb531c328bf51ebab0279671dbc33cbf8cea1edf3b41666219ba9e71394dc27e5e57289d4c49ca3d703b6b3562249a4f41265f18a9eddef9ad9f54cfff9855a187e0c9cca65dbea79e075754622ff3434af1a82b7d3e4a4c27a7c1df49375ee5f384ee3ecd275461112e02dadcc8c417cd5d160b11ffc469869facafce0e3d92a8d417ff835d48b5d5695c0696ca061b9dc1dbeeece795913a14cee3ee8b992c9576c08acab2860933d529ed5c340d27345f3aaf3d0acce8b37b39252f25740df802570ec8178d9d835156003933717648f8a3388dd4fb0ce53982670a46263b8cd0b0b1e9f3cbb1bd8bd92254adb0874238468e4f5c7eb3333b6f5204ecf1779fa7a284818fc9fae08ce1eb36c280c5e78efca7a796dca3d43affd946c892071346505104fd6e22c05042433f8bbdbe36e3ed693208f071940de8e13cdf7511840273462fc772b1f3634d24026c5294c07a55ad5dda420b85edab855471ae33f6538a3f7d863bde03ec95ffb93c2673f7d701a5ce31fe58a01a662710640db53cf50d5ee0db0abc71544820cdf03863b5f3aa5a13ef38a34db83052cf3c72f7f4a66eaabf7549bfd02f65bf315c70bd1f07a7dfdc6effe11e065f5f4430cc2f497be90b59510c64f4d704f7076a637adaa0851f5f2699df9bfc8e1507575171cf6950531655779822c06b7e591c6931853d4b77f8919f09dbb739496a80b4fb2f2c0622c6f37044493b9ae664280c6b6c78e4400cc9a36f87e8211f5aee49eb1fd34b2dc722eaad500cef8409db6dc5a348f8cb6bc6e401c671617af99c64cb9062d308163b68f1a0b6dc9a2559f501fc1e8ebaec306fa934dd6b451bdbb892d1a5c64282253fb02d4a51fb1eb8c33e341bb05c5291443e589a29f61125cf3034fb9f5f50c3e09531ccb13ce54b880279f8118af6c7d9b9fdf56ca393cdffc36e0e2e4c0e5fc1473ec6d7151eb5c1a17080a2b6a379e8e9302a5e2ba810518bf53fec782a3d3141a6fb432b4842630cdefcea808e6a18a3b0fa38e009343f6f03cbad92d73e5999936c72696f5600723a173a8fe6f8091645f2eff27da6d94c02e814339c3b5f79367ea5fbbf24513fce85a174a8ecd452c38ea6ccaaccacf707541106a2df94479db4cb31183ad234f6f323b124cb0fc683d7b51a8811e2aad6e206f4d7734ab497b3b3795b571c4f142fd92a4edca8dfd2525fb9eb1914b5e58c62f20cd4abc3b54e50f3108910072fdf10dc22558c8e28493cc9379f4c6a049b51311ff7036cf8ac8f7439c68d15d91db6003bd34c32830b10cf74931266f16e4501c84aaedc72d6591e88d2654deb48c10aa2e4dfba1625f91a245b8900d30109e29af7b86134029d86b73221eb15b4d01868bdfd39e3c0dac496f22f10fd995ecf112a557601ae31e5f5701253232e202ae8edcb7b658021f554015d6bbe45d44994e4fd4f6309da926addfd1e4dedab7cc430eb905b3121a39cbe0f1a29edf7e1ae220ed06a458776c9b61a569f1e8cba7f40e79c940b9d62eb6919afd641b299800e604bd5d8c46a5dab313d9803bf4eb309b29db7a4f06dad3de5f5cdecd739061cf608d49d5ff944b0818e86c6a2a4497d911d46b7c166e22e869ffdd6b20e347498b871264050a216a7f0e361be2161cba37d15bd90173448dcf5a4d82bf9d3ee3b93ad8ecaeb757a76af93e7c3b1ff42df11d767786b9647149588da9e20efa579c376d652e504c29fa28e9bac308319bb81b27ba386f304144f6204baac4a34eec1718912a58277986ce4591c4806d8a63fccc1327d7c518095db732da5ca8eb667353a610721737891a475c4a60f6856ef98f9761d85f723ccb0c9766591d1241980bfc0019d23095ed2735f2b15e342ff0aec4b48f6ddb4edd1e333e5d22a7ce0eef0b0fc8c0f1564c44ebeef260310cd2f2cbaec4bf09a62d09534ab81f5a998c7aac07a614d2c9efefbac96c37f2b3f3882e2fe957ba145bddb1b7663c7b72258cf59461a6c6c382fd36897613cedc088c4b27e3cc880185b4116fbb281d02d59ea9e1c91be3014f6d8634dd73920a64b6c2162d1bc983e7e44fd52a2277828eba2dbb955d1f55d0cc0fa3d6c437879b10a5cce508067c02b0650f6941feafa25d16061411694b198de8c2c5b725aeeac36252f5cc30765c0203f8df5f95f47f9860426bf4b36bc23964bccc854eba29951a582346c7031b2a020e256ded623ce865bb4e8826a60af9ae6767e9eb168e2d83e492aa19f49b27a7ca908c57388e242d7dc50fabac114d908dcdfb21aa7133b24c38de92c0a57b9577c7d77670f2f2a78f0c2c4e5569606b595ed48bdded08b1b05b8a4b57c02981b0b96a7313723f0565a1755dcf6b9ed676ea1bf05b53cb1419946b00eb7288c60da5287beae6cf4b1efd6d3fc123619320385c493cb4c86309ea24946b6c94e46ef609882d79c5dcd8a6c1e4d337f225ceca1ae424e23de1791a76217784a8381524f274c5d782c9a51eb3040e811e248a76c140e6d6fd41d4da4baa104892cfc574cd7cf7b8b164b2528c6044844d8a0d8e5be5b4898a57139262f88147275cc7a7b1c163b6b0cb2331972aa8e99a2ca30b595cd81601f3fbf247fae244b7dcd09b47bed6bba36ef257bade00a2267b20294216961bd08f5a258ef51942c70e9620ae741db14b0f104923dd01b0d9fa834564ae730dffd70c2a0a609fc3bf9ba797f3faa098dd3babd9ac99f3b4429d26f8b4463e52b99761deee0f70d30b15842c13170f02a7db8610315e2b215068c40a42f3120a0762effa0114d1195060ed619d1a067d488eeb95a369c3e1aee9f1d09fd11d1c424d4a58078fca9c87ebfad053bd87fdc32adaacd052269e2fd9b2d2732aef67fad787ecb9b80301b3accf21df3bf844150f13a54f3b84410a36b76388e2f6767080d0747cdc699ed1af110de57058711e3e8ffde156204ee3324d9bf280d3dd8b0147d650728564825b4344f4e273a4f9471fb25621f8d574d60aaeecda3558b366a742366badfa462fce569c824c12cdefbaeefba5e06549cd316a45d6cb770b09efc7088de60bcdbc999fc8500b4ebf6b29cde63766b8c92c18cd1c1b4bcc5ffab54d323738138e187773cfb38ac001277c516f01abbc352458eb8c806576c51789cae1650cf00a778b47043420a18320b4547db222e41a9ee48e01e375eb3811cad5bb633d5395073789aaf27d4197f81a2420464d2dad9eb6cb90c0faf73df9119a9e332b7a86eb6538390e52d6d00513efd3c181e53038744ba8b6e94b05c07ad7bdf36634d1c2851d44e4e05a0bb405d1132c2d29e73d2df979e00c0ee441d42c59ebfe98a7ac10000140910ae31ba21f93c9172bfd264cd59862f53dc9dacbf8189cbe4f1bd0258b343306d0ece47f983693e41370389f6bd6813a044aca2af8a8adc8d8067e0601e068b35a6b013214a646427581d62acdea4933acd29b195264946a1f075dfd97fd2eec098fdb659ac6894f8565637fbeee3ae159d335fb060a4516069421310720501390dbf434d1ee00eb1f47dc1663348a8b1e2107b92f5c965958437510ef5b32b4aab989ec209aad5a80af704a855248d2c50ef836ffac1079fe9f39ee1f77b6aba16d8c6878d38f9fd85f2effa2526e7f0aafd88f99a3094a1b2c09e4a6215ad4bcd47af73c97dd4448355aa102915f4c3c49e4ee6357c09939e5747164fffbf0c9ed097e9b2a1ecd3701733df89a6d4a130d86b7848f736d5a8efa198c9abfbea96640697fc1564ba9fc8a70e2e5a139d550ff72e5fa393a462213db1f68afef2cffe185c2b1015743b73f96ade7e8285649e4e6d8924812d6ef640740da38506ab1bd6866f29f6dd580b6834c8ab061821379f24abb2ff11924609cdf4198a8318b9ae48bd7ca53bc9d5f8cd587e4cc02e99195359c8be8e797c79bf503d251b093df44bcbc101c497e805dd31cb45f8ca51e7a32fe592cb885ba0fce45354cd605849e419f611085252bb040cde0e536afcfc9964aa8c9529816aebed8f3f18f7eea9a3c92ddc00d40589343953902ff6ea79375757e521a370f3c7a080ac67e9ab981836933c149762d3ae360e31d2a7e8ea4af883be15eb2072c983491436351bbdb44a6cd300a3e675a0d1000f5d69aceda8961146ca2165faec6e49d343252817aa3b69369013659f739d085b95d28622076751060d3bab7f89e13d18d71e9ffc848ffa3d0edcbc8e16fef7e362a09c9563416172108839b89d3b6d507905eb479e23f3c5231fb0d6d286b4e96a185e16f2caa1b8ca038e8a2682134de183b2d83ba83c47bb1e5afafe3899a6cf8f49d830a84951950d73fb657d9c9e0bb4323a8cefd445181b67443506bb066ba18b1cf6537308f36ede88b1775ea74d36ef35aed15d66b64179ff4ea672a88347dc91468fe618dc79421eaeaf5f1eefa42e3e37a8aeb8f831f658575163267cd0b3b6d85630b8aaaed0736f7c0186374be72844546f999991dacaa11d4c4f21c96e8397e2d365c1e306e8e1abd03456ddc91d788e0b9e2398beb01315491247c4c6bdf6c6b2fb195f852f0f2c64cd892be384f6fb4eb48049f7db187d4446ca990d0710518675c1143fd00580d5eb4502b9327cf725121a2ee0e4026de7db7c79714424f6f4935570455c502e8493fc9fe2d9dde9a4e4cb62078dd2c15fa32a30c5f786f0bdaf9dc9f5baf968e70c81125c4b27a88fda0ab8c7fd3b47bdfaf586735948f3bad6bb6166b75cc209c152fe2821ce6b7ed22836e763364c803a7b28829f6535320b417436eb22ad4be9bd795b56cc199121b8091bfb30cfd3dcd9111d8a28fa45dc662b5e83ba2f0a5652366f626be1f1eaf2157fa49e7701324ee0fe1a5cde66ff9c714e4f586fdb6fa5e06c674f18abf5fca837a581ecf68fccf233b057f27c53013254fa943cac885c2c817c42bd2d81fc955e7773c537ff9d8f0023ee6cb01dfcbeed9acdc55883ffe1c58adb0d2982ea0d5e31854af3058dd5b19b9184b9dd2ac793b995e28faba31917ecf2e591206dead07d1a5e6f3d953866a0d02b5fc6394fe87c77c2f9662343e70550b53ca9198b15aedc4268f40f92b4041b404340f9a3ea2d336146495e184d83a0f5d7cd1fb3e578961ef2e9bf227ba22eaba6e1f8f863d2f05a733a8eb1065050815d1b7b5ba7265da4921d192774e1fbd1a1272bfcd0cd064dae24614cb7468ffb315e2254e501b553086081c451a028c8b0bcc2b5d0935901b7baa1bbff1792aa5893c46f9e67aa820cec2729cf1ba2fada8ea4dc2f413ec7f6a2306fadab8bea020c38ff599910e9574a8276b905564a5b18fb8f1a2defe9b3992d4c4ee1840f99f0959bae5f1fc558aa7f65ad9bb6d9f04bf3940a7a02b34882ab2e7c0a981e6541e91793c42cfb44b7871bbc9dffcf0e1ebe0b50a76e91b89f06ff882fa6cc6177b69513f48fa49002009999de70d5d174b15c2165ffb948f21874e4ae39ec4cf92de6f8084e9a4d5de26984a5d455c3f889a8825b45abb</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您好，这里需要密码。</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+      </div>
+      <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/%E9%97%B2%E8%B0%88/" class="">
+              闲谈
+            </a>
+          
+        </div>
+        
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>作者:  </strong>Changguo Jia</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>文章链接:  </strong>
+    <a href="/2023/08/18/Diary1/" target="_blank" title="Diary1">http://gmscofield.github.io/2023/08/18/Diary1/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明:   </strong>
+      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      许可协议。转载请注明出处!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <!-- 文章详情页的上一页和下一页 -->
+<div class="post-nav">
+
+
+
+  
+  <div class="post-nav-prev post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+    </div>
+    <a href="/2023/08/19/%E5%A4%A7%E4%B8%89%E4%B8%8B%E5%92%8C%E5%A4%8F%E4%BB%A4%E8%90%A5/" class="post-nav-link">
+      <div class="title">
+        <i class="fas fa-angle-left"></i> 上一篇:
+        <div class="title-text">大三和夏令营</div>
+      </div>
+      
+      <!-- <div class="content">
+        
+  2f490f9e0d18b7eca91f7ddffc4ffa1d642173dffdec2163bdd17bef7
+      </div> -->
+    </a>
+  </div>
+
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+    </div>
+    <a href="/2023/08/14/%E7%90%86%E6%83%B3%E4%B8%BB%E4%B9%89/" class="post-nav-link">
+      <div class="title">
+        下一篇: <i class="fas fa-angle-right"></i>
+        <div class="title-text">理想主义</div>
+      </div>
+      <!-- <div class="content">
+        
+  74116da6efefdd52520b0903926a3445a985475c79fd773ed6e2826c8
+      </div> -->
+    </a>
+  </div>
+
+</div>
+
+    
+    
+
+    <!-- 打赏 -->
+    
+
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+<!-- 文章详情页的分享 -->
+<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+
+<script src="/js/shareJs/social-share.min.js"></script>
+</script>
+
+<style>
+  .social-share {
+    margin: 20px 0;
+  }
+</style>
+
+
+    
+    
+    <!-- 评论 -->
+    <!-- 评论 -->
+
+  <div id="myComment">
+    
+  </div>
+
+<!-- comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
+
+
+  </div>
+
+  <!-- 目录 -->
+  <aside id='l_side'>
+  
+    
+      <section class="widget side_blogger">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box rectangle' target="_blank" rel="noopener" href='https://jiachangguo.github.io/'>
+          <img src='https://pic2.zhimg.com/80/v2-42b72d5ebee4b8d8aa70d9687effe87b_1440w.webp'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+          <h2>MScofield</h2>
+        
+        
+          <p>竹影疏风</p>
+
+        
+        
+          <p><span id="jinrishici-sentence">MScofield's blog</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/gmscofield123@gmail.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/gmscofield"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=1023975367"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://facebook.com/mcgscofield"
+              class="social fab fa-facebook flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://instagram.com/mcgscofield"
+              class="social fab fa-instagram flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+    
+  
+  
+  
+    
+  
+
+  <div class="layout_sticky">    
+    
+      
+<section class="widget side_toc">
+  
+  <header>
+    
+      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="toc-main">
+      <div class="toc-content">
+        <!--  -->
+        <div class="toc"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 手机端目录按钮 -->
+<div id="toc-mobile-btn">
+  <i class="fas fa-list-ul" aria-hidden="true"></i>
+</div>
+
+      
+  <section class="widget side_recent_post">
+    
+  <header>
+    
+      <i style="color: " class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name' style="color: ">最新文章</span>
+    
+  </header>
+
+
+    <div class='content'>
+      
+      <!-- hash算法 -->
+      
+      <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2023/08/29/IP-container/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-29</span>
+                
+              </div>
+              <a class="post-title" href="/2023/08/29/IP-container/">IP container</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2023/08/28/SBOM%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-28</span>
+                
+              </div>
+              <a class="post-title" href="/2023/08/28/SBOM%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/">SBOM自动生成工具</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2023/08/28/Diary2/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-28</span>
+                
+              </div>
+              <a class="post-title" href="/2023/08/28/Diary2/">Diary2</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2023/08/27/%E5%88%AB%E4%BA%BA%E5%AE%B6%E7%9A%84%E5%A4%A7%E5%AD%A6%E7%B3%BB%E5%88%97%E2%80%94%E2%80%94%E5%8C%97%E5%A4%96%E7%AF%87/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-27</span>
+                
+              </div>
+              <a class="post-title" href="/2023/08/27/%E5%88%AB%E4%BA%BA%E5%AE%B6%E7%9A%84%E5%A4%A7%E5%AD%A6%E7%B3%BB%E5%88%97%E2%80%94%E2%80%94%E5%8C%97%E5%A4%96%E7%AF%87/">别人家的大学系列——北外篇</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2023/08/27/%E5%88%AB%E4%BA%BA%E5%AE%B6%E7%9A%84%E5%A4%A7%E5%AD%A6%E7%B3%BB%E5%88%97%E2%80%94%E2%80%94%E7%99%BE%E4%B8%BD%E5%AE%AB%E7%AF%87/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-27</span>
+                
+              </div>
+              <a class="post-title" href="/2023/08/27/%E5%88%AB%E4%BA%BA%E5%AE%B6%E7%9A%84%E5%A4%A7%E5%AD%A6%E7%B3%BB%E5%88%97%E2%80%94%E2%80%94%E7%99%BE%E4%B8%BD%E5%AE%AB%E7%AF%87/">别人家的大学系列——百丽宫篇</a>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+  </section>
+
+    
+  </div>
+</aside>
+
+  <!-- 图片放大 Wrap images with fancybox support -->
+  <script src="/js/wrapImage.js"></script>
+</div>
+
+<!-- 文章详情页背景图 -->
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
+	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
+	<transition-group tag="ul" :name="names">
+		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+			<img :src="image" class="bg-swiper-img no-lazy">
+		</li>
+	</transition-group>
+</div>
+<script>
+	var vm = new Vue({
+		el: '#appBgSwiper',
+		data: {
+			names: '' || 'fade' || 'fade', // translate-fade fade
+			mark: 0,
+			img: [],
+			bgColor: '',
+			time: null
+		},
+		methods: {   //添加方法
+			change(i, m) {
+				if (i > m) {
+					// this.names = 'fade';
+				} else if (i < m) {
+					// this.names = 'fade';
+				} else {
+					return;
+				}
+				this.mark = i;
+			},
+			prev() {
+				// this.names = 'fade';
+				this.mark--;
+				if (this.mark === -1) {
+					this.mark = 3;
+					return
+				}
+			},
+			next() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			autoPlay() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			play() {
+				let bgImgDelay = '' || '180000'
+				let delay = parseInt(bgImgDelay) || 180000;
+				this.time = setInterval(this.autoPlay, delay);
+			},
+			enter() {
+				clearInterval(this.time);
+			},
+			leave() {
+				this.play();
+			}
+		},
+		created() {
+			this.play()
+		},
+		beforeDestroy() {
+			clearInterval(this.time);
+		},
+		mounted() {
+			let prop = '' || '';
+			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
+			if (isImg) {
+				let img = prop.split(',');
+				let configRoot = '/'
+				let arrImg = [];
+				img.forEach(el => {
+					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+					var objExp = new RegExp(Expression);
+
+					if (objExp.test(el)) {
+						// http or https
+						arrImg.push(el);
+					} else {
+						// 非http or https开头
+						// 本地文件
+						let firstStr = el.charAt(0);
+						if (firstStr == '/') {
+							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+						}
+						el = configRoot + el;
+						arrImg.push(el);
+					}
+				})
+				this.img = arrImg;
+			} else {
+				this.bgColor = prop;
+			}
+		}
+	})
+</script>
+
+<style>
+	.bg-swiper-box {
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.bg-swiper-img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+
+
+
+  <script>
+  function loadMermaid() {
+    if (document.getElementsByClassName('mermaid').length) {
+      if (window.mermaidJsLoad) mermaid.init()
+      else {
+        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
+          window.mermaidJsLoad = true
+          mermaid.initialize({
+            theme: 'default',
+          })
+          if ('true') {
+            mermaid.init();
+          }
+        })
+      }
+    }
+  };
+  document.addEventListener("DOMContentLoaded", function () {
+    loadMermaid();
+  })
+
+  document.addEventListener('pjax:complete', function () {
+    loadMermaid();
+  })
+  
+</script>
+
+
+      </main>
+    </div>
+
+    <!-- 页脚 -->
+    
+  
+  
+    <!-- 底部鱼儿跳动效果，依赖于jquery-->
+<script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=0&t=n&d=LizODBOVkARynqBRscKTfDR6ytF6lCHnLngFVSm0ZRw&co=ffffff&cmo=ffffff&cmn=ffffff&ct=ffffff'></script>
+<div id="j-fish-skip" style=" position: relative;height: 93px;width: auto;"></div>
+<script>
+  var RENDERER = {
+    POINT_INTERVAL: 5,
+    FISH_COUNT: 3,
+    MAX_INTERVAL_COUNT: 50,
+    INIT_HEIGHT_RATE: .5,
+    THRESHOLD: 50,
+    FISH_COLOR: '',
+    init: function () {
+      this.setFishColor(); this.setParameters(), this.reconstructMethods(), this.setup(), this.bindEvent(), this.render()
+    },
+    setFishColor: function () {
+      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+      if (isDark) {
+        this.FISH_COLOR = '#222'; // 暗黑色，有时间把这整成一个变量
+      } else {
+        this.FISH_COLOR = '' || 'rgba(66, 185, 133, 0.8)';
+      }
+    },
+    setParameters: function () {
+      this.$window = $(window), this.$container = $("#j-fish-skip"), this.$canvas = $("<canvas />"), this.context = this.$canvas.appendTo(this.$container).get(0).getContext("2d"), this.points = [], this.fishes = [], this.watchIds = []
+    },
+    createSurfacePoints: function () {
+      var t = Math.round(this.width / this.POINT_INTERVAL);
+      this.pointInterval = this.width / (t - 1), this.points.push(new SURFACE_POINT(this, 0));
+      for (var i = 1; i < t; i++) {
+        var e = new SURFACE_POINT(this, i * this.pointInterval),
+          h = this.points[i - 1];
+        e.setPreviousPoint(h), h.setNextPoint(e), this.points.push(e)
+      }
+    },
+    reconstructMethods: function () {
+      this.watchWindowSize = this.watchWindowSize.bind(this), this.jdugeToStopResize = this.jdugeToStopResize.bind(this), this.startEpicenter = this.startEpicenter.bind(this), this.moveEpicenter = this.moveEpicenter.bind(this), this.reverseVertical = this.reverseVertical.bind(this), this.render = this.render.bind(this)
+    },
+    setup: function () {
+      this.points.length = 0, this.fishes.length = 0, this.watchIds.length = 0, this.intervalCount = this.MAX_INTERVAL_COUNT, this.width = this.$container.width(), this.height = this.$container.height(), this.fishCount = this.FISH_COUNT * this.width / 500 * this.height / 500, this.$canvas.attr({
+        width: this.width,
+        height: this.height
+      }), this.reverse = !1, this.fishes.push(new FISH(this)), this.createSurfacePoints()
+    },
+    watchWindowSize: function () {
+      this.clearTimer(), this.tmpWidth = this.$window.width(), this.tmpHeight = this.$window.height(), this.watchIds.push(setTimeout(this.jdugeToStopResize, this.WATCH_INTERVAL))
+    },
+    clearTimer: function () {
+      for (; this.watchIds.length > 0;) clearTimeout(this.watchIds.pop())
+    },
+    jdugeToStopResize: function () {
+      var t = this.$window.width(),
+        i = this.$window.height(),
+        e = t == this.tmpWidth && i == this.tmpHeight;
+      this.tmpWidth = t, this.tmpHeight = i, e && this.setup()
+    },
+    bindEvent: function () {
+      this.$window.on("resize", this.watchWindowSize), this.$container.on("mouseenter", this.startEpicenter), this.$container.on("mousemove", this.moveEpicenter)
+    },
+    getAxis: function (t) {
+      var i = this.$container.offset();
+      return {
+        x: t.clientX - i.left + this.$window.scrollLeft(),
+        y: t.clientY - i.top + this.$window.scrollTop()
+      }
+    },
+    startEpicenter: function (t) {
+      this.axis = this.getAxis(t)
+    },
+    moveEpicenter: function (t) {
+      var i = this.getAxis(t);
+      this.axis || (this.axis = i), this.generateEpicenter(i.x, i.y, i.y - this.axis.y), this.axis = i
+    },
+    generateEpicenter: function (t, i, e) {
+      if (!(i < this.height / 2 - this.THRESHOLD || i > this.height / 2 + this.THRESHOLD)) {
+        var h = Math.round(t / this.pointInterval);
+        h < 0 || h >= this.points.length || this.points[h].interfere(i, e)
+      }
+    },
+    reverseVertical: function () {
+      this.reverse = !this.reverse;
+      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].reverseVertical()
+    },
+    controlStatus: function () {
+      for (var t = 0, i = this.points.length; t < i; t++) this.points[t].updateSelf();
+      for (t = 0, i = this.points.length; t < i; t++) this.points[t].updateNeighbors();
+      this.fishes.length < this.fishCount && 0 == --this.intervalCount && (this.intervalCount = this.MAX_INTERVAL_COUNT, this.fishes.push(new FISH(this)))
+    },
+    render: function () {
+      requestAnimationFrame(this.render), this.controlStatus(), this.context.clearRect(0, 0, this.width, this.height), this.context.fillStyle = this.FISH_COLOR;
+      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].render(this.context);
+      this.context.save(), this.context.globalCompositeOperation = "xor", this.context.beginPath(), this.context.moveTo(0, this.reverse ? 0 : this.height);
+      for (t = 0, i = this.points.length; t < i; t++) this.points[t].render(this.context);
+      this.context.lineTo(this.width, this.reverse ? 0 : this.height), this.context.closePath(), this.context.fill(), this.context.restore()
+    }
+  },
+  SURFACE_POINT = function (t, i) {
+    this.renderer = t, this.x = i, this.init()
+  };
+  SURFACE_POINT.prototype = {
+    SPRING_CONSTANT: .03,
+    SPRING_FRICTION: .9,
+    WAVE_SPREAD: .3,
+    ACCELARATION_RATE: .01,
+    init: function () {
+      this.initHeight = this.renderer.height * this.renderer.INIT_HEIGHT_RATE, this.height = this.initHeight, this.fy = 0, this.force = {
+        previous: 0,
+        next: 0
+      }
+    },
+    setPreviousPoint: function (t) {
+      this.previous = t
+    },
+    setNextPoint: function (t) {
+      this.next = t
+    },
+    interfere: function (t, i) {
+      this.fy = this.renderer.height * this.ACCELARATION_RATE * (this.renderer.height - this.height - t >= 0 ? -1 : 1) * Math.abs(i)
+    },
+    updateSelf: function () {
+      this.fy += this.SPRING_CONSTANT * (this.initHeight - this.height), this.fy *= this.SPRING_FRICTION, this.height += this.fy
+    },
+    updateNeighbors: function () {
+      this.previous && (this.force.previous = this.WAVE_SPREAD * (this.height - this.previous.height)), this.next && (this.force.next = this.WAVE_SPREAD * (this.height - this.next.height))
+    },
+    render: function (t) {
+      this.previous && (this.previous.height += this.force.previous, this.previous.fy += this.force.previous), this.next && (this.next.height += this.force.next, this.next.fy += this.force.next), t.lineTo(this.x, this.renderer.height - this.height)
+    }
+  };
+  var FISH = function (t) {
+    this.renderer = t, this.init()
+  };
+  FISH.prototype = {
+    GRAVITY: .4,
+    init: function () {
+      this.direction = Math.random() < .5, this.x = this.direction ? this.renderer.width + this.renderer.THRESHOLD : -this.renderer.THRESHOLD, this.previousY = this.y, this.vx = this.getRandomValue(4, 10) * (this.direction ? -1 : 1), this.renderer.reverse ? (this.y = this.getRandomValue(1 * this.renderer.height / 10, 4 * this.renderer.height / 10), this.vy = this.getRandomValue(2, 5), this.ay = this.getRandomValue(.05, .2)) : (this.y = this.getRandomValue(6 * this.renderer.height / 10, 9 * this.renderer.height / 10), this.vy = this.getRandomValue(-5, -2), this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1, this.theta = 0, this.phi = 0
+    },
+    getRandomValue: function (t, i) {
+      return t + (i - t) * Math.random()
+    },
+    reverseVertical: function () {
+      this.isOut = !this.isOut, this.ay *= -1
+    },
+    controlStatus: function (t) {
+      this.previousY = this.y, this.x += this.vx, this.y += this.vy, this.vy += this.ay, this.renderer.reverse ? this.y > this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy -= this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(.05, .2)), this.isOut = !1) : this.y < this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy += this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1), this.isOut || (this.theta += Math.PI / 20, this.theta %= 2 * Math.PI, this.phi += Math.PI / 30, this.phi %= 2 * Math.PI), this.renderer.generateEpicenter(this.x + (this.direction ? -1 : 1) * this.renderer.THRESHOLD, this.y, this.y - this.previousY), (this.vx > 0 && this.x > this.renderer.width + this.renderer.THRESHOLD || this.vx < 0 && this.x < -this.renderer.THRESHOLD) && this.init()
+    },
+    render: function (t) {
+      t.save(), t.translate(this.x, this.y), t.rotate(Math.PI + Math.atan2(this.vy, this.vx)), t.scale(1, this.direction ? 1 : -1), t.beginPath(), t.moveTo(-30, 0), t.bezierCurveTo(-20, 15, 15, 10, 40, 0), t.bezierCurveTo(15, -10, -20, -15, -30, 0), t.fill(), t.save(), t.translate(40, 0), t.scale(.9 + .2 * Math.sin(this.theta), 1), t.beginPath(), t.moveTo(0, 0), t.quadraticCurveTo(5, 10, 20, 8), t.quadraticCurveTo(12, 5, 10, 0), t.quadraticCurveTo(12, -5, 20, -8), t.quadraticCurveTo(5, -10, 0, 0), t.fill(), t.restore(), t.save(), t.translate(-3, 0), t.rotate((Math.PI / 3 + Math.PI / 10 * Math.sin(this.phi)) * (this.renderer.reverse ? -1 : 1)), t.beginPath(), this.renderer.reverse ? (t.moveTo(5, 0), t.bezierCurveTo(10, 10, 10, 30, 0, 40), t.bezierCurveTo(-12, 25, -8, 10, 0, 0)) : (t.moveTo(-5, 0), t.bezierCurveTo(-10, -10, -10, -30, 0, -40), t.bezierCurveTo(12, -25, 8, -10, 0, 0)), t.closePath(), t.fill(), t.restore(), t.restore(), this.controlStatus(t)
+    }
+  }, $(function () {
+    RENDERER.init()
+    $('.dark').click(function () {
+      setTimeout(() => {
+        RENDERER.setFishColor();
+        RENDERER.context.fill();
+      });
+    })
+  });
+</script>
+
+  
+  <div class="footer bg-color">
+    <div class="footer-main">
+      
+        
+          <div class="link">
+            
+              
+                <a href="/gmscofield123@gmail.com" class="social">
+                  
+                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                  
+                </a>
+              
+            
+              
+                <a target="_blank" rel="noopener" href="https://github.com/gmscofield" class="social">
+                  
+                    <i class="fab fa-github" aria-hidden="true"></i>
+                  
+                </a>
+              
+            
+              
+                <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=1023975367" class="social">
+                  
+                    <i class="fab fa-qq" aria-hidden="true"></i>
+                  
+                </a>
+              
+            
+              
+                <a target="_blank" rel="noopener" href="https://facebook.com/mcgscofield" class="social">
+                  
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                  
+                </a>
+              
+            
+              
+                <a target="_blank" rel="noopener" href="https://instagram.com/mcgscofield" class="social">
+                  
+                    <i class="fab fa-instagram" aria-hidden="true"></i>
+                  
+                </a>
+              
+            
+          </div>
+        
+      
+        
+          <div class="footer-copyright">
+            <p>Copyright © 2023 <a target="_blank" rel="noopener" href="https://github.com/gmscofield">MScofield</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/yuang01/theme">Bamboo</a> </p>
+
+          </div>
+        
+      
+        
+          
+            <div><p>万般付之一笑，共偕老</p>
+</div>
+          
+        
+      
+        
+          <div class="footer-custom">
+            
+          </div>
+        
+      
+    </div>
+  </div>
+
+
+
+    <!-- 渲染暗黑按钮 -->
+    
+      <div class="dark">
+  <div class="dark-content">
+    <i class="fas fa-moon" aria-hidden="true"></i>
+    <!-- <span>关灯</span> -->
+  </div>
+  
+</div>
+
+<script>
+  $(function() {
+    let isDark = JSON.parse(localStorage.getItem('dark'))  || JSON.parse('false');
+    if (isDark) {
+      $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fas fa-lightbulb" aria-hidden="true"></i>
+          </div>
+          `
+        );
+    }
+    $('.dark').click(function() {
+      if ($(document.body).is('.darkModel')) {
+        $(document.body).removeClass('darkModel');
+        localStorage.setItem('dark', false);
+        $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </div>
+          `
+        );
+      } else {
+        $(document.body).addClass('darkModel');
+        localStorage.setItem('dark', true);
+        $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fas fa-lightbulb" aria-hidden="true"></i>
+          </div>
+          `
+        );
+      }
+    })
+  })
+</script>
+    
+    <!-- 渲染回到顶部按钮 -->
+    
+      <div class="goTop top-btn-color" pointer>
+  <i class="fas fa-arrow-up" aria-hidden="true"></i>
+</div>
+<script src="/js/goTop.js"></script>
+
+    
+    <!-- 渲染左下角音乐播放器 -->
+    
+
+    <!-- 图片放大 -->
+    
+      <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    
+
+    <!-- 百度解析 -->
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <!-- 背景彩带 -->
+    
+      <script type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
+    
+
+    <script src="/js/utils/index.js"></script>
+    <script src="/js/app.js"></script>
+    
+    <!-- 文章目录所需js -->
+<!-- <link href="/js/tocbot/tocbot.css" rel="stylesheet">
+<script src="/js/tocbot/tocbot.min.js"></script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.css">
+
+<script>
+  var headerEl = 'h2, h3, h4',  //headers 
+    content = '.post-detail',//文章容器
+    idArr = {};  //标题数组以确定是否增加索引id
+  //add #id
+  var option = {
+    // Where to render the table of contents.
+    tocSelector: '.toc',
+    // Where to grab the headings to build the table of contents.
+    contentSelector: content,
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: headerEl,
+    scrollSmooth: true,
+    scrollSmoothOffset: -70,
+    // headingsOffset: -($(window).height() * 0.4 - 45),
+    headingsOffset: -($(window).height() * 0.4 - 70),
+    // positionFixedSelector: '.toc-main',
+    // positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    activeLinkClass: 'is-active-link',
+    orderedList: true,
+    collapseDepth: 20,
+    // onClick: function (e) {},
+  }
+  if ($('.toc').length > 0) {
+
+    $(content).children(headerEl).each(function () {
+      //去除空格以及多余标点
+      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
+
+      headerId = headerId.toLowerCase();
+      if (idArr[headerId]) {
+        //id已经存在
+        $(this).attr('id', headerId + '-' + idArr[headerId]);
+        idArr[headerId]++;
+      }
+      else {
+        //id未存在
+        idArr[headerId] = 1;
+        $(this).attr('id', headerId);
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      tocbot.init(option);
+      mobileTocClick();
+    });
+
+  }
+
+  window.tocScrollFn = function () {
+    return bamboo.throttle(function () {
+      findHeadPosition();
+    }, 100)()
+  }
+  window.addEventListener('scroll', tocScrollFn);
+
+  const findHeadPosition = function (top) {
+    if ($('.toc-list').length <= 0) {
+      return false;
+    }
+    setTimeout(() => {  // or DOMContentLoaded 
+      autoScrollToc();
+    }, 0);
+  }
+
+  const autoScrollToc = function () {
+    const $activeItem = document.querySelector('.is-active-link');
+    const $cardToc = document.querySelector('.toc-content');
+    const activePosition = $activeItem.getBoundingClientRect().top
+    const sidebarScrollTop = $cardToc.scrollTop
+    if (activePosition > (document.documentElement.clientHeight - 100)) {
+      $cardToc.scrollTop = sidebarScrollTop + 150
+    }
+    if (activePosition < 150) {
+      $cardToc.scrollTop = sidebarScrollTop - 150
+    }
+  }
+
+  document.addEventListener('pjax:send', function () {
+    if ($('.toc').length) {
+      tocbot.destroy();
+    }
+  });
+
+  document.addEventListener('pjax:complete', function () {
+    if ($('.toc').length) {
+      tocbot.init(option);
+      mobileTocClick();
+    }
+  });
+  
+  // 手机端toc按钮点击出现目录
+  const mobileTocClick = function () {
+    const $cardTocLayout = document.getElementsByClassName('side_toc')[0];
+    const $cardToc = $cardTocLayout.getElementsByClassName('toc-content')[0];
+    let right = '45px';
+    if (window.innerWidth >= 551 && window.innerWidth <= 992) {
+      right = '100px'
+    }
+    const mobileToc = {
+      open: () => {
+        $cardTocLayout.style.cssText = 'animation: toc-open .3s; opacity: 1; right: ' + right
+      },
+
+      close: () => {
+        $cardTocLayout.style.animation = 'toc-close .2s'
+        setTimeout(() => {
+          $cardTocLayout.style.cssText = "opacity:''; animation: ''; right: ''"
+        }, 100)
+      }
+    }
+    document.getElementById('toc-mobile-btn').addEventListener('click', () => {
+      if (window.getComputedStyle($cardTocLayout).getPropertyValue('opacity') === '0') mobileToc.open()
+      else mobileToc.close()
+    })
+
+    $cardToc.addEventListener('click', (e) => {
+      if (window.innerWidth < 992) { // 小于992px的时候
+        mobileToc.close()
+      }
+    })
+  }
+</script>
+
+<style>
+  /* .is-position-fixed {
+    position: sticky !important;
+    top: 74px;
+  }
+
+  .toc-main ul {
+    counter-reset: show-list;
+  }
+
+  .toc-main ul li::before {
+    content: counter(item)".";
+    display: block;
+    position: absolute;
+    left: 12px;
+    top: 0;
+  } */
+</style>
+ 
+
+<!-- 设置导航背景 -->
+<script>
+  let setHeaderClass = () => {
+    const nav = $('#navHeader');
+    const navTop = nav.outerHeight();
+    const winTop = $(window).scrollTop();
+    if(winTop > navTop) {
+      nav.addClass('header-bg-color');
+    }
+    else {
+      nav.removeClass('header-bg-color');
+    }
+  };
+
+  let scrollCollect = () => {
+    return bamboo.throttle(function (e) {
+      setHeaderClass();
+    }, 200)()
+  }
+
+  let initHeaderBg = () => {
+    setHeaderClass();
+  }
+
+  setHeaderClass();
+  window.addEventListener('scroll', scrollCollect);
+
+  document.addEventListener('pjax:send', function () {
+    window.removeEventListener('scroll', scrollCollect)
+  })
+  document.addEventListener('pjax:complete', function () {
+    window.addEventListener('scroll', scrollCollect);
+    setHeaderClass();
+  })
+</script> 
+
+<!-- 渲染issues标签里的内容 -->
+<script>
+  function loadIssuesJS() {
+    if ($(".post-detail").find(".issues-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/issues/index.js');
+  };
+  $(function () {
+    loadIssuesJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof IssuesAPI == "undefined") {
+      loadIssuesJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的图片标签(getPhotoOnline)里的内容 -->
+<script>
+  function loadPhotoOnlineJS() {
+    if ($(".post-detail").find(".getJsonPhoto-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/getPhotoOnline/index.js');
+  };
+  $(function () {
+    loadPhotoOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getPhotoJson == "undefined") {
+      loadPhotoOnlineJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的talk标签(getTalkOnline)里的内容 -->
+<script>
+  function loadTalkOnlineJS() {
+    if ($(".post-detail").find(".getJsonTalk-api").length == 0) {
+      return;
+    } 
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/waterfall.js/1.0.2/waterfall.min.js'); // 瀑布流插件，https://raphamorim.io/waterfall.js/
+    loadScript('/js/getTalkOnline/index.js');
+  };
+  $(function () {
+    loadTalkOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getTalkJson == "undefined") {
+      loadTalkOnlineJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的site-card标签(getSiteOnline)里的内容 -->
+<script>
+  function loadSiteOnlineJS() {
+    if ($(".post-detail").find(".getJsonSite-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/getSiteOnline/index.js');
+  };
+  $(function () {
+    loadSiteOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getSiteJson == "undefined") {
+      loadSiteOnlineJS();
+    }
+  })
+</script>
+
+<!-- 输入框打字特效 -->
+<!-- 输入框打字特效 -->
+
+  <script src="/js/activate-power-mode.js"></script>
+  <script>
+    POWERMODE.colorful = true;  // 打开随机颜色特效
+    POWERMODE.shake = false;    // 关闭输入框抖动
+    document.body.addEventListener('input', POWERMODE);//监听打字事件
+  </script>
+
+
+<!-- markdown代码一键复制功能 -->
+
+  <link rel="stylesheet" href="https://unpkg.com/v-plugs-ayu/lib/ayu.css">
+  <script src="https://unpkg.com/v-plugs-ayu/lib/ayu.umd.min.js"></script>
+  <script src="/js/clipboard/clipboard.min.js"></script>
+  <div id="appCopy">
+  </div>
+  <script data-pjax>
+    var vm = new Vue({
+      el: '#appCopy',
+      data: {
+      },
+      computed: {
+      },
+      mounted() {
+        const that = this;
+        var copy = '复制';
+        /* code */
+        var initCopyCode = function () {
+          var copyHtml = '';
+          copyHtml += '<button class="btn-copy" data-clipboard-snippet="" style="position:absolute;top:0;right:0;z-index:1;">';
+          copyHtml += '<i class="fas fa-copy"></i><span>' + copy + '</span>';
+          copyHtml += '</button>';
+          $(".post-detail pre").not('.gutter pre').wrap("<div class='codeBox' style='position:relative;width:100%;'></div>")
+          $(".post-detail pre").not('.gutter pre').before(copyHtml);
+          new ClipboardJS('.btn-copy', {
+            target: function (trigger) {
+              return trigger.nextElementSibling;
+            }
+          });
+        }
+        initCopyCode();
+        $('.btn-copy').unbind('click').bind('click', function () {
+          doSomething();
+        })
+        $(document).unbind('keypress').bind('keypress', function (e) {
+          if (e.ctrlKey && e.keyCode == 67) {
+            doSomething();
+          }
+        })
+
+        function doSomething() {
+          that.$notify({
+            title: "成功",
+            content: "代码已复制，请遵守相关授权协议。",
+            type: 'success'
+          })
+        }
+      },
+      methods: {
+      },
+      created() { }
+    })
+  </script>
+  
+
+<!-- 图片懒加载 -->
+<script defer src="https://unpkg.com/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+<!-- 卡片滚动动画 -->
+   
+
+<!-- 评论所需js -->
+
+  
+
+
+<!-- 鼠标点击特效 -->
+<!-- 爱心点击 -->
+
+  
+    <script src="/js/cursor/fireworks.js"></script>
+  
+
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" data-pjax></script>
+
+
+<!-- 轮播图标签 -->
+<script>
+  var bambooSwiperTag = {};
+  function load_swiper() {
+    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
+    loadCSS("https://unpkg.com/swiper@6/swiper-bundle.min.css")
+    loadScript("https://unpkg.com/swiper@6/swiper-bundle.min.js").then(() => {
+      pjax_swiper();
+    });
+  }
+
+  load_swiper();
+
+  function pjax_swiper() {
+    bambooSwiperTag.swiper = new Swiper('.post-swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 8,
+      centeredSlides: true,
+      loop: true,
+      autoplay: true ? {
+        delay: 3000,
+        stopOnLastSlide: false,
+        disableOnInteraction: false,
+      } : false,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      on:{
+        init: function(){
+          swiperAnimateCache(this); //隐藏动画元素 
+          swiperAnimate(this); //初始化完成开始动画
+        }, 
+        slideChangeTransitionEnd: function(){ 
+          swiperAnimate(this); //每个slide切换结束时也运行当前slide动画
+          //this.slides.eq(this.activeIndex).find('.ani').removeClass('ani'); 动画只展现一次，去除ani类名
+        } 
+      }
+    });
+  }
+
+  document.addEventListener('pjax:complete', function () {
+    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
+    if (typeof bambooSwiperTag.swiper === "undefined") {
+      load_swiper();
+    } else {
+      pjax_swiper();
+    }
+  });
+</script>
+    <!-- pjax -->
+    
+
+<!-- pjax -->
+
+
+  <script src="/js/pjax@0.2.8/index.js"></script>
+  
+    <!-- 样式位于：source/css/_third-party/pjaxanimate.styl -->
+
+<div class="pjax-animate">
+  
+    <div class="loading-circle"><div id="loader-circle"></div></div>
+    <script>
+      window.ShowLoading = function() {
+        $(".loading-circle").css("display", "block");
+      };
+      window.HideLoading = function() {
+        $(".loading-circle").css("display", "none");
+      }
+    </script>
+  
+	<script>
+    document.addEventListener('pjax:complete', function () {
+      window.HideLoading();
+    })
+    document.addEventListener('pjax:send', function () {
+      window.ShowLoading();
+    })
+    document.addEventListener('pjax:error', function () {
+      window.HideLoading();
+    })
+	</script>
+</div>
+
+  
+
+  <script>
+    var pjax = new Pjax({
+      elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([no-pjax])',   // 拦截正常带链接的 a 标签
+      selectors: ["#pjax-container","title"],                                   // 根据实际需要确认重载区域
+      cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+      timeout: 5000
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+
+    })
+    
+    document.addEventListener('pjax:complete', function () {
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      window.location.href = e.triggerElement.href;
+    })
+    
+    // 刷新不从顶部开始
+    document.addEventListener("DOMContentLoaded", function () {
+      history.scrollRestoration = 'auto';
+    })
+  </script>
+
+
+
+  </body>
+</html>
