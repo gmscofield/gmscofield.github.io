@@ -482,7 +482,7 @@
 </ol>
 <h4 id="具体操作展示-1"><a href="#具体操作展示-1" class="headerlink" title="具体操作展示"></a>具体操作展示</h4><p>Syft的操作较为简单，并且命令行中没有过多输出，所以这里不展示命令行操作界面，只展示一下最终生成的 SBOM 的样式。</p>
 <p><img src="/../pic/sbom-tools/syft1.png" class="lazyload placeholder" data-srcset="/../pic/sbom-tools/syft1.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp"></p>
-<h3 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h3><p>目前来看，Syft的原理似乎是扫描本地磁盘上所有相关的库与工程等，与Salus相比它似乎缺少了一个联网的功能（<strong>有待验证</strong>）</p>
+<h3 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h3><p>目前来看，Syft的原理似乎是扫描本地磁盘上所有相关的库与工程等，与Salus相比它似乎缺少了一个联网的功能（<strong>有待验证</strong>）。</p>
 <h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p>优点：</p>
 <ol>
 <li><p>易于操作，部署工作简单</p>
@@ -507,7 +507,60 @@
 <p>或者说没有公开工具采用的格式。</p>
 </li>
 </ol>
-<h2 id="Dependencytrack"><a href="#Dependencytrack" class="headerlink" title="Dependencytrack"></a>Dependencytrack</h2>
+<h2 id="Dependencytrack"><a href="#Dependencytrack" class="headerlink" title="Dependencytrack"></a>Dependencytrack</h2><p>以下内容参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yemoox/p/16478513.html">该博客</a>。</p>
+<p>Dependency-Track是一个智能<a target="_blank" rel="noopener" href="https://owasp.org/www-community/Component_Analysis">组件分析</a>平台，允许组织识别和降低软件供应链中的风险。Dependency-Track通过利用 SBOM 的功能，采取了一种独特且非常有益的方法。这种方法提供了传统软件组合分析（SCA）解决方案无法实现的功能。Dependency-Track监控其投资组合中每个应用程序所有版本的组件使用情况，以便主动识别整个组织的风险。该平台采用API优先设计，非常适合在CI&#x2F;CD环境中使用。</p>
+<p>这里先放一个Dependencytrack的官方文档链接：<a target="_blank" rel="noopener" href="https://docs.dependencytrack.org/%E3%80%82">https://docs.dependencytrack.org/。</a></p>
+<h3 id="安装-2"><a href="#安装-2" class="headerlink" title="安装"></a>安装</h3><h4 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h4><p>先狠狠吐槽一下，官方文档给的安装说明是真的差劲。。。按他那个说明安装困难极大（反正我是没装上）。</p>
+<p>直接参考上面的博客，安装步骤如下：</p>
+<p>在命令行窗口中依次执行下面的代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker pull dependencytrack/bundled</span><br><span class="line">docker volume create --name dependency-track</span><br><span class="line">docker images</span><br><span class="line">docker run -d -m 8192m -p 8080:8080 --name dependency-track -v dependency-track:/data dependencytrack/bundled</span><br><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+
+<p>然后直接通过浏览器访问8080端口即可（<a target="_blank" rel="noopener" href="http://0.0.0.0:8080/%EF%BC%89%E3%80%82">http://0.0.0.0:8080/）。</a></p>
+<p>进入网页后使用admin&#x2F;admin登录进去，成功登录后会让你重新设置admin账户的密码。重新设置即可安装完成。使用admin修改后的账户重新登陆DependenyTrack。</p>
+<p><img src="/../pic/sbom-tools/dt3.jpg" class="lazyload placeholder" data-srcset="/../pic/sbom-tools/dt3.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp"></p>
+<h4 id="Docker镜像的使用"><a href="#Docker镜像的使用" class="headerlink" title="Docker镜像的使用"></a>Docker镜像的使用</h4><p>这里简单补充一点 docker 知识。</p>
+<ol>
+<li><p>查看所有 docker 容器中的镜像。</p>
+<p>可以从中获取自己想要的<code>Container ID</code>，然后就可以针对不同的<code>ID</code>启动不同的镜像了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start Container-ID</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关闭镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop Container-ID</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>安装完毕后，下一次打开此 <code>Docker</code> 镜像只需要通过 <code>docker start Container-ID</code> 命令启动即可。</p>
+<p>这里值得注意的是，在使用<code>docker start Container-ID</code>命令启动镜像之后，有可能打不开相应的镜像。这个时候可以使用<code>docker ps -a</code>命令查看所有镜像，观察刚刚启动的镜像的情况。</p>
+<p>当此时镜像的健康状态是<code>starting</code>的时候，说明镜像正在启动。</p>
+<p>当此时镜像的健康状态是<code>unhealthy</code>的时候，说明镜像的启动出现了问题，需要关闭镜像重新启动（先<code>docker stop Container-ID</code>再<code>docker start Container-ID</code>）。</p>
+<p>（下面这个截图是本地截的，本地跑失败了555）</p>
+<p><img src="/../pic/sbom-tools/dt1.jpg" class="lazyload placeholder" data-srcset="/../pic/sbom-tools/dt1.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp"></p>
+<p>当此时镜像的健康状态是<code>healthy</code>的时候，说明镜像启动成功。</p>
+<p>（下面这个截图是服务器截的，红色框内的是我的 docker 镜像）</p>
+<p><img src="/../pic/sbom-tools/dt2.jpg" class="lazyload placeholder" data-srcset="/../pic/sbom-tools/dt2.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp"></p>
+<h3 id="使用-2"><a href="#使用-2" class="headerlink" title="使用"></a>使用</h3><h4 id="Dependencytrack界面介绍"><a href="#Dependencytrack界面介绍" class="headerlink" title="Dependencytrack界面介绍"></a>Dependencytrack界面介绍</h4><ol>
+<li>Dashboard：为仪表盘，作为组件漏洞的统计展示</li>
+<li>Projects：为项目，一般来说，一个bom.xml文件创建一个工程；也有特殊情况，如果一个项目里面包含多个微服务，每个微服务都有一个bom.xml，则会为每个微服务创建项目。</li>
+<li>Component：可进行相关组件的搜索，如搜索fastjson，右边为存在fastjson的项目。</li>
+<li>Vulnerabilities：漏洞库，没啥好解释的，注意更新就行。</li>
+<li>Licenses：顾名思义，组件使用的Licenses库，如Apache</li>
+<li>Policy Management</li>
+<li>Administration：这里进行后台管理配置，自动化构建需要在这里获取apikey，记得选用具有上传权限的apikey，似乎可以与 Jenkins 联动，但是我没尝试过</li>
+</ol>
+<h4 id="分析SBOM"><a href="#分析SBOM" class="headerlink" title="分析SBOM"></a>分析SBOM</h4><p>Dependencytrack主要其实是用来分析 cycloneDX 格式的SBOM的。</p>
+<p>这里我用 Syft 生成 numpy 库的 cycloneDX 格式的 SBOM 后上传到 Dependencytrack 上进行分析。</p>
+<p>分析步骤：</p>
+<ol>
+<li>点击右边栏，进入Projects。</li>
+<li>通过 Create Porject创建项目，填写项目名称，项目类型，点击Create进行创建。</li>
+<li>然后在Project页面找到刚创建的项目，点击项目名称进入项目，目前由于没有上传bom.xml也就是软件物料文件，所以没有数据显示。</li>
+<li>点击Components-&gt;Upload Bom进行上传。这里上传了本地分析的numpy的SBOM。</li>
+</ol>
+<p>完成上述所有步骤后，就可以观察 numpy 的 SBOM 的分析情况了。</p>
+<p><img src="/../pic/sbom-tools/dt4.jpg" class="lazyload placeholder" data-srcset="/../pic/sbom-tools/dt4.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp"></p>
+<h3 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h3><p>少有的可视化工具，非常有用！</p>
+
       </div>
       <div class="post-tags-categories">
         
@@ -706,7 +759,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Salus%EF%BC%88Microsoft-Sbom-Tool%EF%BC%89"><span class="toc-text">Salus（Microsoft Sbom Tool）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C"><span class="toc-text">命令行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%85%A5"><span class="toc-text">输入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%87%BA"><span class="toc-text">输出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E6%93%8D%E4%BD%9C%E5%B1%95%E7%A4%BA"><span class="toc-text">具体操作展示</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Syft"><span class="toc-text">Syft</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-1"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-1"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C-1"><span class="toc-text">命令行</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BE%93%E5%85%A5-1"><span class="toc-text">输入</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%92%E9%99%A4%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84"><span class="toc-text">排除文件路径</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BE%93%E5%87%BA-1"><span class="toc-text">输出</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A3%E5%9C%A8%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-text">正在实现的功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E6%93%8D%E4%BD%9C%E5%B1%95%E7%A4%BA-1"><span class="toc-text">具体操作展示</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%90%86-1"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-1"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dependencytrack"><span class="toc-text">Dependencytrack</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Salus%EF%BC%88Microsoft-Sbom-Tool%EF%BC%89"><span class="toc-text">Salus（Microsoft Sbom Tool）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C"><span class="toc-text">命令行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%85%A5"><span class="toc-text">输入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%87%BA"><span class="toc-text">输出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E6%93%8D%E4%BD%9C%E5%B1%95%E7%A4%BA"><span class="toc-text">具体操作展示</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Syft"><span class="toc-text">Syft</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-1"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-1"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C-1"><span class="toc-text">命令行</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BE%93%E5%85%A5-1"><span class="toc-text">输入</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%92%E9%99%A4%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84"><span class="toc-text">排除文件路径</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BE%93%E5%87%BA-1"><span class="toc-text">输出</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A3%E5%9C%A8%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-text">正在实现的功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E6%93%8D%E4%BD%9C%E5%B1%95%E7%A4%BA-1"><span class="toc-text">具体操作展示</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%90%86-1"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-1"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dependencytrack"><span class="toc-text">Dependencytrack</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-2"><span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="toc-text">安装步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Docker%E9%95%9C%E5%83%8F%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">Docker镜像的使用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-2"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Dependencytrack%E7%95%8C%E9%9D%A2%E4%BB%8B%E7%BB%8D"><span class="toc-text">Dependencytrack界面介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%9E%90SBOM"><span class="toc-text">分析SBOM</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-2"><span class="toc-text">总结</span></a></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
