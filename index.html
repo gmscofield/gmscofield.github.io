@@ -1012,7 +1012,7 @@
         :data="listData"
         :class-option="classOption"
         class="warp"
-        style="height: 90px"
+        style="height: 120px"
       >
         <ul class="index-notice-content__ul">
           
@@ -1067,6 +1067,23 @@
                 
               
             </li>
+          
+            <li>
+              
+                <div class="index-notice-content__title">
+                  
+                    <span title="有些人我永远不会考虑，有些事明知不会发生，就不要去计划。" style="">
+                      有些人我永远不会考虑，有些事明知不会发生，就不要去计划。
+                    </span>
+                  
+                </div>
+                
+                  <div class="index-notice-content__date" style="">
+                    2023-09-12
+                  </div>
+                
+              
+            </li>
            
         </ul>
       </vue-seamless-scroll>
@@ -1081,7 +1098,7 @@
 <script>
   var seamless = JSON.parse('false');
   seamless = seamless ? 0 : 30;
-  var listData = '[object Object],[object Object],[object Object]' || '';
+  var listData = '[object Object],[object Object],[object Object],[object Object]' || '';
   listData = listData.split(',');
   var vm = new Vue({
     el: '#appIndexNotice',
@@ -1938,8 +1955,8 @@ The (Microsoft) SBOM tool is a hig
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Tue Sep 12 2023 22:32:16 GMT+0800 (中国标准时间)</div>
-            <div id="last-update-show">2023-09-12 日</div>
+            <div id="last-update" style="display: none;">Wed Sep 13 2023 00:23:27 GMT+0800 (中国标准时间)</div>
+            <div id="last-update-show">2023-09-13 日</div>
           
         </div>
         
@@ -1989,7 +2006,7 @@ The (Microsoft) SBOM tool is a hig
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2023-09-12 日';
+            document.getElementById('last-update-show').innerHTML = '2023-09-13 日';
           }
         </script>
         
