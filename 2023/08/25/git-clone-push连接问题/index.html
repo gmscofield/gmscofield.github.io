@@ -377,6 +377,25 @@
 
 
 <p>闲扯一句，之前听某17级的老哥说，在他大一那年，学校的校园网还是提供了魔法给同学们使用的，但是他大二的时候因为某些众所周知的原因就被ban了，结果现在只能八仙过海各显神通。。。</p>
+<h4 id="2023-11-7更新"><a href="#2023-11-7更新" class="headerlink" title="2023-11-7更新"></a>2023-11-7更新</h4><p>由于人尽皆知的原因，clash寄了。。。</p>
+<p>所以我转用v2rayN了（x</p>
+<p>下面记录一下使用v2rayN的时候如何配置命令行窗口。</p>
+<p>首先启动代理服务器，下面标注了我的socks端口为10808，http端口为10809，下面开始配置命令行。</p>
+<p>由于我只需要临时生效，并不需要永久生效的方法，所以这里只记录临时生效的修改方法。</p>
+<p>在windows的cmd命令行窗口中，执行以下命令：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用sock代理</span></span><br><span class="line"><span class="built_in">set</span> http_proxy=socks5://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">10808</span></span><br><span class="line"><span class="built_in">set</span> https_proxy=socks5://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">10808</span></span><br><span class="line"><span class="comment"># 使用http代理</span></span><br><span class="line"><span class="built_in">set</span> https_proxy=http://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">10809</span></span><br></pre></td></tr></table></figure>
+
+<p>这样一来我们就配置成功啦（完结撒花）~</p>
+<p>为了测试是否配置成功，可以使用命令<code>curl -I www.google.com</code>：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\User&gt;<span class="built_in">curl</span> <span class="literal">-I</span> www.google.com</span><br><span class="line">HTTP/<span class="number">1.1</span> <span class="number">200</span> OK</span><br></pre></td></tr></table></figure>
+
+<p>如果返回的是<code>HTTP/1.1 200 OK</code>，状态码报200，说明设置成功。</p>
+<span class='p red'>注意：这里不可以使用 ping 命令进行测试（我试过了，ping会失败），因为ping是ICMP协议，不是TCP/UDP协议，ping不走，也无法走代理。</span>
+
+<p>如果要取消设置：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> http_proxy=</span><br><span class="line"><span class="built_in">set</span> https_proxy=</span><br></pre></td></tr></table></figure>
+
+<p>注意，在此方案中，当关闭cmd后，再次打开时，之前的设置将会失效，代理依然使用不了。</p>
 
       </div>
       <div class="post-tags-categories">
@@ -596,7 +615,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">修改配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%BE%E5%88%B0%E5%90%88%E9%80%82%E7%9A%84ip"><span class="toc-text">找到合适的ip</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE"><span class="toc-text">修改配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E8%84%91%E6%96%B9%E6%B3%95"><span class="toc-text">无脑方法</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">修改配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%BE%E5%88%B0%E5%90%88%E9%80%82%E7%9A%84ip"><span class="toc-text">找到合适的ip</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE"><span class="toc-text">修改配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E8%84%91%E6%96%B9%E6%B3%95"><span class="toc-text">无脑方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2023-11-7%E6%9B%B4%E6%96%B0"><span class="toc-text">2023-11-7更新</span></a></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -622,6 +641,69 @@
       <!-- hash算法 -->
       
       <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2023/11/07/%E6%B8%B8%E5%8E%86%E4%BA%BA%E7%94%9F/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">11-07</span>
+                
+              </div>
+              <a class="post-title" href="/2023/11/07/%E6%B8%B8%E5%8E%86%E4%BA%BA%E7%94%9F/">游历人生</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2023/11/07/%E4%BA%AC%E5%9F%8E%E6%B8%B8%E8%AE%B0/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">11-07</span>
+                
+              </div>
+              <a class="post-title" href="/2023/11/07/%E4%BA%AC%E5%9F%8E%E6%B8%B8%E8%AE%B0/">京城游记</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2023/11/07/Diary4/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">11-07</span>
+                
+              </div>
+              <a class="post-title" href="/2023/11/07/Diary4/">Diary4</a>
+            </div>
+          </div>
         
           <div class="aside-list-item">
             
@@ -662,69 +744,6 @@
                 
               </div>
               <a class="post-title" href="/2023/09/16/%E7%90%86%E6%83%B3%E4%B8%BB%E4%B9%89/">理想主义</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2023/09/13/%E6%AF%8F%E5%BD%93%E5%8F%98%E5%B9%BB%E6%97%B6&%E5%8D%81%E4%BA%8C%E5%A4%9C/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">09-13</span>
-                
-              </div>
-              <a class="post-title" href="/2023/09/13/%E6%AF%8F%E5%BD%93%E5%8F%98%E5%B9%BB%E6%97%B6&%E5%8D%81%E4%BA%8C%E5%A4%9C/">每当变幻时&amp;十二夜</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2023/09/12/%E5%BD%B1%E8%AF%84%E5%89%8D%E8%A8%80/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">09-12</span>
-                
-              </div>
-              <a class="post-title" href="/2023/09/12/%E5%BD%B1%E8%AF%84%E5%89%8D%E8%A8%80/">影评前言</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2023/08/30/SBOM%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">08-30</span>
-                
-              </div>
-              <a class="post-title" href="/2023/08/30/SBOM%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/">SBOM自动生成工具</a>
             </div>
           </div>
         
