@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>git连接问题 | MScofield&#39;s blog</title>
+  <title>SBOM自动生成工具 | MScofield&#39;s blog</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -325,14 +325,14 @@
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        git连接问题
+        SBOM自动生成工具
       </span>
     </div>
     
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> 发表于：2023-08-25 |
+          <i class="fas fa-calendar"></i> 发表于：2024-10-16 |
         </span>
       
 
@@ -356,55 +356,71 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <p>嗯，纯粹水一篇blog（<span class='p red'>不然开始到现在一篇技术相关的都没写也太尬了！</span>）</p>
-<h2 id="git基本使用"><a href="#git基本使用" class="headerlink" title="git基本使用"></a>git基本使用</h2><p>想把电脑上的东西存在github上，先贴一篇博客<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45491549/article/details/128825216%EF%BC%8C%E6%95%99%E4%BD%A0%E6%80%8E%E4%B9%88%E6%93%8D%E4%BD%9C%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E3%80%82">https://blog.csdn.net/qq_45491549/article/details/128825216，教你怎么操作私有仓库。</a></p>
-<p>创建仓库：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;jcg&quot;</span></span><br><span class="line">git remote add origin https://github.com/...</span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
-
-<p>拉取仓库：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull https://github.com/...</span><br></pre></td></tr></table></figure>
-
-<p>上传到仓库：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;jcg&quot;</span></span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
-
-<h2 id="git-clone-push连接问题"><a href="#git-clone-push连接问题" class="headerlink" title="git clone&#x2F;push连接问题"></a>git clone&#x2F;push连接问题</h2><p>由于众所周知的原因，国内git clone&#x2F;push经常会因为网络连接原因失败。这里简单介绍两种解决方案。</p>
-<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>下面以windows系统为例。（因为我的服务器上似乎没出现过这类问题）</p>
-<h4 id="找到合适的ip"><a href="#找到合适的ip" class="headerlink" title="找到合适的ip"></a>找到合适的ip</h4><p>强烈安利一个网站：<a target="_blank" rel="noopener" href="https://www.ping.cn/dns/github.com">ping.cn</a>（<span class='p red'>我承认它有一种钓鱼网站的既视感，但是真的很好用！！！</span>）。</p>
-<p>在网站的DNS查询里面输入github.com，找到解析时间最短的ip地址，记住，下面要考。</p>
-<h4 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h4><p>在<code>C:\Windows\System32\drivers\etc</code>文件夹下修改<code>host</code>文件。</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  一般格式：ip+空格+github.com，切记不要加www，下面的ip是我瞎写的</span></span><br><span class="line"><span class="number">192.30</span>.<span class="number">255.112</span> github.com git </span><br></pre></td></tr></table></figure>
-
-<p>刷新配置：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipconfig /flushdns</span><br></pre></td></tr></table></figure>
-
-<p>亲测可行！！！</p>
-<p>（其实只是连上的概率大了一点而已，还是会出现连不上的情况。。。）</p>
-<h3 id="无脑方法"><a href="#无脑方法" class="headerlink" title="无脑方法"></a>无脑方法</h3><p>嗯，我冲了两年会员才发现这个方法，感觉眼睛和脑子在我身上就是个摆设qaq</p>
-<p>点击运行Clash for Windows，第一行有个端口，右边有个命令行的小图标，点击一下就可以用魔法修改后的命令行窗口了。</p>
-<span class='p red'>官方说了不准宣扬所以不敢放图，sad...</span>
-
-
-
-<p>闲扯一句，之前听某17级的老哥说，在他大一那年，学校的校园网还是提供了魔法给同学们使用的，但是他大二的时候因为某些众所周知的原因就被ban了，结果现在只能八仙过海各显神通。。。</p>
-<h4 id="2023-11-7更新"><a href="#2023-11-7更新" class="headerlink" title="2023-11-7更新"></a>2023-11-7更新</h4><p>由于人尽皆知的原因，clash寄了。。。</p>
-<p>所以我转用v2rayN了（x</p>
-<p>下面记录一下使用v2rayN的时候如何配置命令行窗口。</p>
-<p>首先启动代理服务器，下面标注了我的socks端口为10808，http端口为10809，下面开始配置命令行。</p>
-<p>由于我只需要临时生效，并不需要永久生效的方法，所以这里只记录临时生效的修改方法。</p>
-<p>在windows的cmd命令行窗口中，执行以下命令：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用sock代理</span></span><br><span class="line"><span class="built_in">set</span> http_proxy=socks5://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">10808</span></span><br><span class="line"><span class="built_in">set</span> https_proxy=socks5://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">10808</span></span><br><span class="line"><span class="comment"># 使用http代理</span></span><br><span class="line"><span class="built_in">set</span> https_proxy=http://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">10809</span></span><br></pre></td></tr></table></figure>
-
-<p>这样一来我们就配置成功啦（完结撒花）~</p>
-<p>为了测试是否配置成功，可以使用命令<code>curl -I www.google.com</code>：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\User&gt;<span class="built_in">curl</span> <span class="literal">-I</span> www.google.com</span><br><span class="line">HTTP/<span class="number">1.1</span> <span class="number">200</span> OK</span><br></pre></td></tr></table></figure>
-
-<p>如果返回的是<code>HTTP/1.1 200 OK</code>，状态码报200，说明设置成功。</p>
-<span class='p red'>注意：这里不可以使用 ping 命令进行测试（我试过了，ping会失败），因为ping是ICMP协议，不是TCP/UDP协议，ping不走，也无法走代理。</span>
-
-<p>如果要取消设置：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> http_proxy=</span><br><span class="line"><span class="built_in">set</span> https_proxy=</span><br></pre></td></tr></table></figure>
-
-<p>注意，在此方案中，当关闭cmd后，再次打开时，之前的设置将会失效，代理依然使用不了。</p>
+        <h1 id="A-Survey-of-Large-Language-Models"><a href="#A-Survey-of-Large-Language-Models" class="headerlink" title="A Survey of Large Language Models"></a>A Survey of Large Language Models</h1><p><a target="_blank" rel="noopener" href="https://github.com/RUCAIBox/LLMSurvey">https://github.com/RUCAIBox/LLMSurvey</a></p>
+<h2 id="语言建模（LM）的发展历史"><a href="#语言建模（LM）的发展历史" class="headerlink" title="语言建模（LM）的发展历史"></a>语言建模（LM）的发展历史</h2><p>SLM（统计语言模型，统计学习方法）-&gt; NLM（神经语言模型，特征学习方法）-&gt; PLM（Pre-training Language Model） -&gt; LLM（Large Language Model）</p>
+<p>LLM与PLM的几点区别：</p>
+<ol>
+<li>LLM表现出涌现能力（在小型模型中不存在但在大型模型中产生的能力），规模提升时，性能显著提高</li>
+<li>LLM改变了人类使用人工智能算法的方式（API）</li>
+<li>LLM的发展不再区分研究和工程。为了开发出有能力的LLM，研究人员必须解决复杂的工程问题，他们需要与工程师合作或成为工程师。</li>
+</ol>
+<h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><ol>
+<li>为什么LLM相较于PLM能力提升如此明显？</li>
+<li>研究界难以训练出有能力的LLM，而工业界并不会向公众透露LLM的训练细节</li>
+<li>如何将LLM与人类价值观或偏好保持一致？</li>
+</ol>
+<p>面对如此挑战，研究者无法深入理解LLM的基本原理。</p>
+<p>本文从四个方面阐述LLM的进展：</p>
+<ol>
+<li>预训练（如何预训练出一个有能力的 LLM）</li>
+<li>适配微调（如何从有效性和安全性两个角度有效地微调预训练的 LLM）</li>
+<li>使用（如何利用 LLM 解决各种下游任务）</li>
+<li>能力评估（如何评估 LLM 的能力和现有的经验性发现）</li>
+</ol>
+<p>前两者是从LLM训练的角度展开的，后两者是从LLM应用角度展开的。</p>
+<h2 id="预训练"><a href="#预训练" class="headerlink" title="预训练"></a>预训练</h2><p>数据收集和处理-&gt;模型架构-&gt;优化LLM训练技巧</p>
+<h2 id="适配微调"><a href="#适配微调" class="headerlink" title="适配微调"></a>适配微调</h2><p>预训练后，LLM需要进一步适配到特定的目标中。</p>
+<p>方法如下。</p>
+<h3 id="指令微调（instruction-tuning）"><a href="#指令微调（instruction-tuning）" class="headerlink" title="指令微调（instruction tuning）"></a>指令微调（instruction tuning）</h3><p>增强大模型在特定目标中的表现</p>
+<ol>
+<li>构建格式化实例：格式化已有数据集、格式化人类需求</li>
+<li>微调策略：指令多样性、结合指令微调和预训练</li>
+</ol>
+<h3 id="对齐微调（alignment-tuning）"><a href="#对齐微调（alignment-tuning）" class="headerlink" title="对齐微调（alignment tuning）"></a>对齐微调（alignment tuning）</h3><p>将LLM的行为与人类价值观对齐</p>
+<p>对齐标准：有用性、诚实性、无害性</p>
+<p>用途最广泛的技术：RLHF（基于人类反馈的强化学习）</p>
+<p>RLHF系统的三个关键组件：要对齐的PLM、从人类反馈中学习的奖励模型，以及训练 LM 的 RL 算法。</p>
+<ol>
+<li><p>要对齐的PLM</p>
+<p>使用现有参数进行初始化</p>
+</li>
+<li><p>人类反馈中学习的奖励模型</p>
+<p>经过微调的 LM 或使用人类偏好数据重新训练的 LM （通常采用参数量较小的模型）</p>
+</li>
+<li><p>训练LM的RL算法</p>
+<p>PPO算法——现有工作中广泛使用的RL对齐算法</p>
+</li>
+</ol>
+<p>除此之外，还有LoRA等用于LLM参数高效微调的算法。</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><img src="/../pic/notes/notes/llm_cot.png" class="lazyload placeholder" data-srcset="/../pic/notes/notes/llm_cot.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<ol>
+<li><p>上下文学习（<em>in-context learning, ICL</em>）-Retrieval</p>
+<p>经过预训练后，LLM可以在不更新的情况下展现出较好的ICL能力。</p>
+</li>
+<li><p>思维链提示（<em>chain-of-thought prompting</em>）-Reasoning</p>
+</li>
+</ol>
+<h2 id="能力评估"><a href="#能力评估" class="headerlink" title="能力评估"></a>能力评估</h2><p>大模型的问题：</p>
+<ol>
+<li><p>幻觉</p>
+<p>生成的信息与现有来源相冲突（内在幻觉）或无法通过现有来源验证（外在幻觉）。</p>
+</li>
+<li><p>知识实时性</p>
+<p>面对需要使用比训练数据更新的知识的任务</p>
+<p>微调 LLM 的成本非常昂贵的，而且增量训练 LLM 非常可能导致灾难性遗忘问题。</p>
+<p>ChatGPT使用检索插件来访问最新的信息源，将提取的信息融入上下文中，然而该方法仍然停留于表面层次。一些实验揭示，直接修改内在知识或将特定的知识注入 LLM 是很困难的</p>
+</li>
+</ol>
 
       </div>
       <div class="post-tags-categories">
@@ -426,7 +442,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>文章链接:  </strong>
-    <a href="/2023/08/25/git连接问题/" target="_blank" title="git连接问题">http://gmscofield.github.io/2023/08/25/git连接问题/</a>
+    <a href="/2024/10/16/LLM-survey/" target="_blank" title="SBOM自动生成工具">http://gmscofield.github.io/2024/10/16/LLM-survey/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明:   </strong>
@@ -444,41 +460,22 @@
 
 
 
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-    </div>
-    <a href="/2023/08/26/%E5%A4%A7%E4%B8%89%E5%92%8C%E5%A4%8F%E4%BB%A4%E8%90%A5/" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">大三和夏令营</div>
-      </div>
-      
-      <!-- <div class="content">
-        
-  0e3df18a7cd5138b03375323cff49800f8ab51d3bcfc1d84be78a449d
-      </div> -->
-    </a>
-  </div>
-
 
 
   
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload lazyload placeholder" src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
     </div>
-    <a href="/2023/08/19/%E5%A4%A7%E4%B8%80%E5%92%8C%E5%A4%A7%E4%BA%8C/" class="post-nav-link">
+    <a href="/2024/09/26/%E5%8D%9A%E4%B8%80/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">大一和大二</div>
+        <div class="title-text">博一</div>
       </div>
       <!-- <div class="content">
         
-  0e3df18a7cd5138b03375323cff49800f8ab51d3bcfc1d84be78a449d
+  0e3df18a7cd5138b03375323cff49800d7bf08452ef8c05c734f476bc
       </div> -->
     </a>
   </div>
@@ -626,7 +623,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">git基本使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-clone-push%E8%BF%9E%E6%8E%A5%E9%97%AE%E9%A2%98"><span class="toc-text">git clone&#x2F;push连接问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">修改配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%BE%E5%88%B0%E5%90%88%E9%80%82%E7%9A%84ip"><span class="toc-text">找到合适的ip</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE"><span class="toc-text">修改配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E8%84%91%E6%96%B9%E6%B3%95"><span class="toc-text">无脑方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2023-11-7%E6%9B%B4%E6%96%B0"><span class="toc-text">2023-11-7更新</span></a></li></ol></li></ol></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#A-Survey-of-Large-Language-Models"><span class="toc-text">A Survey of Large Language Models</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E8%A8%80%E5%BB%BA%E6%A8%A1%EF%BC%88LM%EF%BC%89%E7%9A%84%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2"><span class="toc-text">语言建模（LM）的发展历史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Question"><span class="toc-text">Question</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%84%E8%AE%AD%E7%BB%83"><span class="toc-text">预训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%82%E9%85%8D%E5%BE%AE%E8%B0%83"><span class="toc-text">适配微调</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E5%BE%AE%E8%B0%83%EF%BC%88instruction-tuning%EF%BC%89"><span class="toc-text">指令微调（instruction tuning）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E9%BD%90%E5%BE%AE%E8%B0%83%EF%BC%88alignment-tuning%EF%BC%89"><span class="toc-text">对齐微调（alignment tuning）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%BD%E5%8A%9B%E8%AF%84%E4%BC%B0"><span class="toc-text">能力评估</span></a></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
